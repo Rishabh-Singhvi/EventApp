@@ -1,0 +1,273 @@
+<template>
+    <div>
+        <base-header class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center"
+                     style="min-height: 600px; background-image: url(img/theme/Event1.jpg; background-size: cover; background-position: center top;">
+            <!-- Mask -->
+            <span class="mask bg-gradient-success opacity-2"></span>
+            <!-- Header container -->
+            <div class="container-fluid d-flex align-items-center">
+                <div class="row">
+                    <div class="col-lg-7 col-md-10">
+                        <h1 class="display-2 text-white">Event Registration</h1>
+                        <p class="text-white mt-0 mb-5">This is event registration page.You can learn more about the event and register here</p>
+                        
+                    </div>
+                </div>
+            </div>
+        </base-header>
+
+        <div class="container-fluid mt--7">
+            <div class="row">
+                <div class="col-xl-4 order-xl-2 mb-5 mb-xl-0">
+
+                    <div class="card card-profile shadow">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-3 order-lg-2">
+                                <div class="card-profile-image">
+                                    <a href="#">
+                                        <img src="img/theme/d.jpg" class="rounded-circle">
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
+                            
+                        </div>
+                        <div class="card-body pt-0 pt-md-4">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="card-profile-stats d-flex justify-content-center mt-md-5">
+                                       
+                                        <div>
+                                            <span class="heading">Event Details</span>
+                                            <span class="description">Event</span>
+                                        </div>
+                                       
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <h3>
+                                   <span class="font-weight-light"></span>
+                                </h3>
+                                <div class="h5 font-weight-300">
+                                    <i class="ni location_pin mr-2"></i>
+                                </div>
+                                <div class="h5 mt-4">
+                                    <i class="ni business_briefcase-24 mr-2"></i>
+                                </div>
+                                <div>
+                                    <i class="ni education_hat mr-2"></i>
+                                </div>
+                                <hr class="my-4" />
+                                <p></p>
+                                <a href="#"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-8 order-xl-1">
+                    <card shadow type="secondary">
+                        <div slot="header" class="bg-white border-0">
+                            <div class="row align-items-center">
+                                <div class="col-8">
+                                    <h3 class="mb-0">Event Registration</h3>
+                                </div>
+                                <div class="col-4 text-right">
+                                   
+                                </div>
+                            </div>
+                        </div>
+                        <template>
+                            <form @submit.prevent>
+                                <h6 class="heading-small text-muted mb-4">User information</h6>
+                                <div class="pl-lg-4">
+                                   
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <base-input alternative=""
+                                                        label="First name"
+                                                        placeholder="First name"
+                                                        input-classes="form-control-alternative"
+                                                        v-model="model.firstName"
+                                            />
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <base-input alternative=""
+                                                        label="Last name"
+                                                        placeholder="Last name"
+                                                        input-classes="form-control-alternative"
+                                                        v-model="model.lastName"
+                                            />
+                                        </div>
+                                    </div>
+                                     <div class="row">
+                                        
+                                        <div class="col-lg-6">
+                                            <base-input alternative=""
+                                                        label="Email address"
+                                                        placeholder="abc@example.com"
+                                                        input-classes="form-control-alternative"
+                                                        v-model="model.email"
+                                            />
+                                        </div>
+                                         <div class="col-lg-3">
+                                            <!-- <div class="row col-lg-6"> -->
+                                            <h5>Registration Type</h5>
+                                            <base-dropdown>
+                                            <base-button slot="title" type="default" class="dropdown-toggle ">
+                                                Events
+                                            </base-button>
+                                            <li>
+                                                <a class="dropdown-item">
+                                                    Corporate
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a class="dropdown-item"  >
+                                                   Solo
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a class="dropdown-item"  >
+                                                   Group
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a class="dropdown-item">
+                                                   Business
+                                                </a>
+                                            </li>
+                                        </base-dropdown>
+                                    <!-- </div> -->
+                                        </div>
+
+                                        <div class="col-lg-3">
+                                            <!-- <div class="row col-lg-6"> -->
+                                            <h5>Book tickets</h5>
+                                            <base-dropdown>
+                                            <base-button slot="title" type="default" class="dropdown-toggle ">
+                                                Tickets
+                                            </base-button>
+                                            <li>
+                                                <a class="dropdown-item">
+                                                  1
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a class="dropdown-item"  >
+                                                   2
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a class="dropdown-item"  >
+                                                   3
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a class="dropdown-item">
+                                                   4
+                                                </a>
+                                            </li>
+                                        </base-dropdown>
+                                    <!-- </div> -->
+                                        </div>
+                                    </div>
+                                </div>
+                                 
+                                <hr class="my-4" />
+                                <!-- Address -->
+                                <h6 class="heading-small text-muted mb-4">Contact information</h6>
+                                <div class="pl-lg-4">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                           
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-4">
+                                            <base-input alternative=""
+                                                        label="City"
+                                                        placeholder="City"
+                                                        input-classes="form-control-alternative"
+                                                        v-model="model.city"
+                                            />
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <base-input alternative=""
+                                                        label="Country"
+                                                        placeholder="Country"
+                                                        input-classes="form-control-alternative"
+                                                        v-model="model.country"
+                                            />
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <base-input alternative=""
+                                                        label="Phone Number"
+                                                        placeholder="Phone Number"
+                                                        input-classes="form-control-alternative"
+                                                        v-model="model.phone"
+                                            />
+                                        </div>
+                                    </div>
+                                      <div class="row">
+                                        <div class="col-lg-6">
+                                            <base-input alternative=""
+                                                        label="Address"
+                                                        placeholder="Address"
+                                                        input-classes="form-control-alternative"
+                                                        v-model="model.username"
+                                            />
+                                            
+                                        </div>
+                                         <div class="col-lg-6">
+                                            <base-input alternative=""
+                                                        label="Aadhar Card Number"
+                                                        placeholder="Aadhar Number"
+                                                        input-classes="form-control-alternative"
+                                                        v-model="model.username"
+                                            />
+                                            
+                                        </div>
+                                       
+                                    </div>
+                                </div>
+                                
+                                <hr class="my-4" />
+                                <!-- Description -->
+                               
+                                <div class="pl-lg-4">
+                                    
+                                </div>
+                                <a href="#!" class="btn btn-info">Register</a>
+                            </form>
+                        </template>
+                    </card>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</template>
+<script>
+  export default {
+    name: 'user-profile',
+    data() {
+      return {
+        model: {
+          username: '',
+          email: '',
+          firstName: '',
+          lastName: '',
+          address: '',
+          city: '',
+          country: '',
+          zipCode: '',
+          about: '',
+        }
+      }
+    },
+  };
+</script>
+<style></style>
