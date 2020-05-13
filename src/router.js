@@ -49,6 +49,11 @@ export default new Router({
           path: '/Meetup',
           name: 'Meetup',
           component: () => import(/* webpackChunkName: "demo" */ './views/Meetup.vue')
+        },
+        {
+          path: '/allEvent',
+          name: 'All Event',
+          component: () => import(/* webpackChunkName: "demo" */ './views/allEvent.vue')
         }
       ]
     },

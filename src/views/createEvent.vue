@@ -33,20 +33,16 @@
                                 <h6 class="heading-small text-muted mb-4">Event Information</h6>
                                 <div class="pl-lg-4">
                                     <div class="row">
-                                        <div class="col-lg-6">
+                                        <div class="col-lg-12">
                                             <base-input alternative=""
                                                         label="Title"
                                                         placeholder="Title"
                                                         input-classes="form-control-alternative"
-                                                        v-model="model.username"
+                                                        v-model="eventObj.title"
                                             />
                                             
                                         </div>
-                                        <div class="upload-btn-wrapper col-lg-6">
-                                            <h4>Upload an image of the event</h4>
-                                            <base-button type="primary" icon="ni ni-bag-17">Choose Image</base-button>
-                                            <input type="file" name="myfile" id="in" />
-                                        </div>
+                                       
                                     </div>
                                    <div class="row"> 
                                     <div class="col-lg-6">
@@ -57,54 +53,96 @@
                                                     @on-close="blur"
                                                     :config="{allowInput: true}"
                                                     class="form-control datepicker"
-                                                    v-model="dates.simple">
+                                                    v-model="eventObj.timings.date">
                                         </flat-picker>
                                     </base-input>
                                     </div>
                                     <div class="col-lg-3">
                                       <h4>Start Time</h4>
-                                       <vue-timepicker id="vue-timepicker" label="from" format="hh:mm A"></vue-timepicker>
+                                       <vue-timepicker id="vue-timepicker" input-class="my-awesome-picker" v-model="eventObj.timings.start"></vue-timepicker>
                                     </div>
                                     <div class="col-lg-3">
                                       <h4>End Time</h4>
-                                       <vue-timepicker id="vue-timepicker" label="from" format="hh:mm A"></vue-timepicker>
+                                        <vue-timepicker id="vue-timepicker" input-class="my-awesome-picker" v-model="eventObj.timings.end"></vue-timepicker>
                                     </div>
                                   </div>
                                      <div >
                                        <h4>Description</h4>
                                        <form>
-                                        <textarea class="form-control form-control-alternative" rows="3" placeholder="Write a large text here ..."></textarea>
+                                        <textarea class="form-control form-control-alternative" rows="3" placeholder="Write a large text here ..." v-model="eventObj.description"></textarea>
                                        </form>
                                      </div>
                                      <br>
                                      <div class="row col-lg-6">
                                             <base-dropdown>
                                             <base-button slot="title" type="default" class="dropdown-toggle">
-                                                Select Destination
+                                                Select Event Type
                                             </base-button>
                                             <li>
-                                                <a class="dropdown-item">
-                                                    India
+                                                <a class="dropdown-item" @click="setType('DJ Party')">
+                                                    DJ Party
                                                 </a>
                                             </li>
                                             <li>
-                                                <a class="dropdown-item"  >
-                                                    Switzerland
+                                                <a class="dropdown-item" @click="setType('Festival celebration')" >
+                                                    Festival celebration 
                                                 </a>
                                             </li>
                                             <li>
-                                                <a class="dropdown-item"  >
-                                                    Japan
+                                                <a class="dropdown-item" @click="setType('Drink party')" >
+                                                    Drink party
                                                 </a>
                                             </li>
                                             <li>
-                                                <a class="dropdown-item">
-                                                    Canada
+                                                <a class="dropdown-item" @click="setType('Poet Conference')">
+                                                    Poet Conference
                                                 </a>
                                             </li>
                                         </base-dropdown>
+                                        {{eventObj.type}}
                                     </div>
                                 </div>
+                                <hr class="my-4" />
+                                <h6 class="heading-small text-muted mb-4">Venue</h6>
+                                <div class="pl-lg-4">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <base-input alternative=""
+                                                        label="Address"
+                                                        placeholder="Venue Address"
+                                                        input-classes="form-control-alternative"
+                                                        v-model="eventObj.address"
+                                            />
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-4">
+                                            <base-input alternative=""
+                                                        label="City"
+                                                        placeholder="City"
+                                                        input-classes="form-control-alternative"
+                                                        v-model="eventObj.city"
+                                            />
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <base-input alternative=""
+                                                        label="State"
+                                                        placeholder="State"
+                                                        input-classes="form-control-alternative"
+                                                        v-model="eventObj.state"
+                                            />
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <base-input alternative=""
+                                                        label="Postal code"
+                                                        placeholder="Postal code"
+                                                        input-classes="form-control-alternative"
+                                                        v-model="eventObj.postalCode"
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                                
                                 <hr class="my-4" />
                                 <!-- Address -->
                                 
@@ -117,7 +155,7 @@
                                                         label="Email ID"
                                                         placeholder="Email ID"
                                                         input-classes="form-control-alternative"
-                                                        v-model="model.city"
+                                                        v-model="eventObj.email"
                                             />
                                         </div>
                                         <div class="col-lg-6">
@@ -125,7 +163,7 @@
                                                         label="Phone Number"
                                                         placeholder="Phone Number"
                                                         input-classes="form-control-alternative"
-                                                        v-model="model.country"
+                                                        v-model="eventObj.phoneNo"
                                             />
                                         </div>
                                     </div>
@@ -134,7 +172,7 @@
                         </template>
                     </card>
                     <br>
-                    <base-button type="success">Create</base-button>
+                    <base-button type="success" @click="create">Create</base-button>
                 </div>
             </div>
         </div>
@@ -146,23 +184,31 @@ import "flatpickr/dist/flatpickr.css";
 import VueTimepicker from 'vue2-timepicker'
 
 import 'vue2-timepicker/dist/VueTimepicker.css'
-
+import firebase from '@/firebase_init.js';
+let db = firebase.firestore();
+const auth = firebase.auth();
   export default {
     name: 'user-profile',
     components: {flatPicker,
     VueTimepicker},
     data() {
       return {
-        model: {
-          username: '',
-          email: '',
-          firstName: '',
-          lastName: '',
-          address: '',
-          city: '',
-          country: '',
-          zipCode: '',
-          about: '',
+        eventObj:{
+            'title':'',
+            'description':'',
+            'address':'',
+            'city':'',
+            'state':'',
+            'postalCode':'',
+            'type':'',
+            'email':'',
+            'phoneNo':'',
+            'registeredUsers':[],
+            'timings':{
+                'date':'',
+                'start':'',
+                'end':''
+            },
         },
         waterMark : 'Select a time',
         dates: {
@@ -170,6 +216,25 @@ import 'vue2-timepicker/dist/VueTimepicker.css'
           }
       }
     },
+    methods:{
+        setType(type){
+            this.eventObj.type=type
+            console.log(this.eventObj.type)
+        },
+        create(){
+        console.log(this.eventObj)
+        db.collection('AllEvents').add(this.eventObj).then(snapshot=>{
+            console.log(snapshot)
+            console.log(snapshot.id)
+            this.$notify({
+                type: 'success',
+                title: 'Event Created'
+            })
+            
+        })
+        
+      }
+    }
   };
 </script>
 <style>
