@@ -49,15 +49,15 @@
                                 <div class="col">
                                     <div class="card-profile-stats d-flex justify-content-center mt-md-1">
                                         <div>
-                                            <h4>Date</h4>
+                                            <h5>Date</h5>
                                             <span class="description">{{eventObj.timings.date}}</span>
                                         </div>
                                          <div>
-                                            <h4>Start Time</h4>
+                                            <h5>Start Time</h5>
                                             <span class="description">{{eventObj.timings.start}}</span>
                                         </div>
                                          <div>
-                                            <h4>End Time</h4>
+                                            <h5>End Time</h5>
                                             <span class="description">{{eventObj.timings.end}}</span>
                                         </div>
                                     </div>
@@ -274,7 +274,35 @@
                             </form>
                         </template>
                     </card>
-     
+                    <br>
+                       <div class="col-md-3">
+                        <base-button block type="warning" class=" mb-3" @click="modals.modal2 = true">
+                            Submit
+                        </base-button>
+
+                        <modal :show.sync="modals.modal2"
+                            gradient="danger"
+                            modal-classes="modal-danger modal-dialog-centered">
+                            <h6 slot="header" class="modal-title" id="modal-title-notification">Your attention is required</h6>
+
+                            <div class="py-3 text-center">
+                                <i class="ni ni-bell-55 ni-3x"></i>
+                                <h4 class="heading mt-4">You should read this!</h4>
+                                <p>A small river named Duden flows by their place and supplies it with the
+                                    necessary regelialia.</p>
+                            </div>
+
+                            <template slot="footer">
+                                <base-button type="white">Ok, Got it</base-button>
+                                <base-button type="link"
+                                            text-color="white"
+                                            class="ml-auto"
+                                            @click="modals.modal2 = false">
+                                    Close
+                                </base-button>
+                            </template>
+                        </modal>
+                   </div>
                 </div>
             </div>
         </div>
@@ -294,6 +322,7 @@ const auth = firebase.auth();
     },
     data() {
       return {
+
           userObj:{
             'firstname':'',
             'lastname':'',
@@ -307,12 +336,11 @@ const auth = firebase.auth();
             'address':''
             
           },
-          eventObj:{
-              
-          }
-       
+          eventObj:{},
+        modals:{
+           modal2:false
+        }
 
-       
       }
     },
     methods:{
