@@ -7,16 +7,18 @@
                     <stats-card type="gradient-red"
                                 :sub-title="event.title"
                                 class="mb-4 mb-xl-0"
+                                style="background-image: url(img/theme/bharath-g-s-aLGiPJ4XRO4-unsplash.jpg);background-size: cover; background-position: center top;"
                     >
- 
+                
                         <template slot="footer">
-                            <span >Time slot : {{event.timings.start}}</span> to <span>{{event.timings.end}}</span><br>
-                            <span >Date : {{event.timings.date}} </span>
+                          <hr class="my-4" />
+                            <span class="text-primary mr-4 font-weight-300" >Time slot : </span><span>{{event.timings.start}}</span> to <span>{{event.timings.end}}</span><br>
+                            <span class="text-primary mr-4 font-weight-300">Date : </span><span>{{event.timings.date}} </span>
                             <br>
                             <br>
-                            <p>{{event.description}}</p>
+                            <p class="text-danger mr-4 font-weight-300">{{event.description}}</p>
                             
-                        <router-link :to="{path:'/Meetup/'+event.id}"><base-button  type="primary">View Details</base-button></router-link>
+                        <router-link :to="{path:'/Meetup/'+event.id}"><base-button  type="default">View Details</base-button></router-link>
 
                         </template>
                     </stats-card>
