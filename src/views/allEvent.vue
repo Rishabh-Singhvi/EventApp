@@ -44,9 +44,11 @@ export default {
         };
       }, 
     beforeMount(){
-      this.user = JSON.parse(localStorage.getItem('user'))
       console.log(this.user)
       this.uid = localStorage.getItem('uid')
+      db.collection('users/'+this.uid).onSnapshot(snap=>{
+        this.user=snap.data()
+      })
       this.getEventList()
     },
     methods:{
@@ -59,8 +61,12 @@ export default {
             event = doc.data()
             console.log(event)
             event['id']=doc.id
-            if(!this.user.registeredEvents.includes(event.id))
+            if(!this.user.registeredEvents.includes(event.id)){
+            console.log("hello")
+           console.log(this.user.registeredEvents)
+            console.log("sns")
             this.eventList.push(event)
+            }
           })
           console.log(this.eventList)
         })

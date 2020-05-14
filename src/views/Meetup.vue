@@ -86,7 +86,8 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>                            </div>
+                            </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -114,7 +115,7 @@
                                                         label="First name"
                                                         placeholder="First name"
                                                         input-classes="form-control-alternative"
-                                                        v-model="userObj.firstName"
+                                                        v-model="userObj.first"
                                             />
                                         </div>
                                         <div class="col-lg-6">
@@ -122,7 +123,7 @@
                                                         label="Last name"
                                                         placeholder="Last name"
                                                         input-classes="form-control-alternative"
-                                                        v-model="userObj.lastName"
+                                                        v-model="userObj.last"
                                             />
                                         </div>
                                     </div>
@@ -144,26 +145,26 @@
                                                {{userObj.type}}
                                             </base-button>
                                             <base-button slot="title" type="default" class="dropdown-toggle" v-else>
-                                               Select Event Type
+                                               Select 
                                             </base-button>
                                             <li>
-                                                <a class="dropdown-item" @click="setType('DJ Party')">
-                                                    DJ Party
+                                                <a class="dropdown-item" @click="setType('Self')">
+                                                   Self
                                                 </a>
                                             </li>
                                             <li>
-                                                <a class="dropdown-item" @click="setType('Festival celebration')" >
-                                                    Festival celebration 
+                                                <a class="dropdown-item" @click="setType('Group')" >
+                                                   Group
                                                 </a>
                                             </li>
                                             <li>
-                                                <a class="dropdown-item" @click="setType('Drink party')" >
-                                                    Drink party
+                                                <a class="dropdown-item" @click="setType('Corporate')" >
+                                                    Corporate
                                                 </a>
                                             </li>
                                             <li>
-                                                <a class="dropdown-item" @click="setType('Poet Conference')">
-                                                    Poet Conference
+                                                <a class="dropdown-item" @click="setType('Others')">
+                                                    Others
                                                 </a>
                                             </li>
                                         </base-dropdown>
@@ -212,11 +213,6 @@
                                 <h6 class="heading-small text-muted mb-4">Contact information</h6>
                                 <div class="pl-lg-4">
                                     <div class="row">
-                                        <div class="col-md-12">
-                                           
-                                        </div>
-                                    </div>
-                                    <div class="row">
                                         <div class="col-lg-4">
                                             <base-input alternative=""
                                                         label="City"
@@ -227,10 +223,10 @@
                                         </div>
                                         <div class="col-lg-4">
                                             <base-input alternative=""
-                                                        label="Country"
-                                                        placeholder="Country"
+                                                        label="State"
+                                                        placeholder="State"
                                                         input-classes="form-control-alternative"
-                                                        v-model="userObj.country"
+                                                        v-model="userObj.state"
                                             />
                                         </div>
                                         <div class="col-lg-4">
@@ -283,17 +279,30 @@
                         <modal :show.sync="modals.modal2"
                             gradient="danger"
                             modal-classes="modal-danger modal-dialog-centered">
-                            <h6 slot="header" class="modal-title" id="modal-title-notification">Your attention is required</h6>
-
+                            <h6 slot="header" class="modal-title heading mt-1" id="modal-title-notification">Preview</h6>
                             <div class="py-3 text-center">
-                                <i class="ni ni-bell-55 ni-3x"></i>
-                                <h4 class="heading mt-4">You should read this!</h4>
-                                <p>A small river named Duden flows by their place and supplies it with the
-                                    necessary regelialia.</p>
+                                <i class="ni ni-circle-08 ni-3x"></i>
+                                <h4 class="heading mt-4">Your Details</h4>
+                                <p>Are you sure you want to register</p>
                             </div>
+                            <span class="mb-4">Name :</span><span>{{userObj.first}} 
+                                {{userObj.last}}</span>
+                            <br>
+                            <span>Email :</span><span>{{userObj.email}} </span>
+                            <br>
+                            <span>Phone No. :</span><span>{{userObj.phone}}</span>
+                            <br>
+                            <span>Regitration Type :</span><span>{{userObj.type}}</span>
+                            <br>
+                            <span>Tickets Quantity :</span><span>{{userObj.ticket}}</span>
+                            <br>
+                            <span>Aadhar No. :</span><span>{{userObj.aadhar}}</span>
+                            <br>
+                            <span>Address :</span><span>{{userObj.address}},{{userObj.city}},{{userObj.state}}</span>
+                            
 
                             <template slot="footer">
-                                <base-button type="white">Ok, Got it</base-button>
+                                <base-button type="white" @click="register(eventID)">Register</base-button>
                                 <base-button type="link"
                                             text-color="white"
                                             class="ml-auto"
@@ -324,36 +333,91 @@ const auth = firebase.auth();
       return {
 
           userObj:{
-            'firstname':'',
-            'lastname':'',
+            'first':'',
+            'last':'',
             'email':'',
             'type':'',
             'ticket':'',
             'city':'',
-            'country':'',
+            'state':'',
             'phone':'',
             'aadhar':'',
-            'address':''
-            
-          },
+            'address':'',
+            'registrationNo':''
+            },
           eventObj:{},
         modals:{
            modal2:false
-        }
+        },
+          user:{},
+          uid:''
 
       }
     },
     methods:{
         setType(type){
             this.userObj.type=type
-            console.log(this.userObj.type)
         },
        setTicket(ticket){
             this.userObj.ticket=ticket
-            console.log(this.userObj.ticket)
+        },
+        register(){
+            let eventID = this.$route.params.eventID
+            let today = new Date();
+            let dd = String(today.getDate()).padStart(2, '0');
+            let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+            let yyyy = today.getFullYear();
+
+            today = mm + '/' + dd + '/' + yyyy;
+            let uuser = {
+                'uuid':'',
+                'regID':'',
+                'dor':'',
+                'usernam':''
+                }
+            
+            let regID = '_' + Math.random().toString(36).substr(2, 9);
+            console.log(regID)
+            console.log(eventID)
+            db.doc('AllEvents/'+eventID).get().then(snap=>{
+               let event = {}
+               event = snap.data()
+               console.log(event)
+               uuser.uuid=this.uid
+               uuser.regID=regID
+               uuser.dor=today
+               uuser.usernam=this.user.name
+               console.log(uuser)
+               event.registeredUsers.push(uuser)
+               console.log(event)
+               db.doc('AllEvents/'+eventID).update({
+                   'registeredUsers':event.registeredUsers
+               }).then(sna=>{
+                   this.user.registeredEvents.push(eventID);
+                   console.log(this.user)
+                   db.doc('users/'+this.uid).set(this.user)
+                   this.userObj.registrationNo=regID
+                   db.doc('AllUsers/'+this.uid).set(this.userObj).then(sn=>{
+                       this.$notify({
+                            type: 'success',
+                            title: 'Registered'
+                            }) 
+                   }).then(()=>{
+                       this.$router.push('/allEvent')
+                   })
+               })
+            })
+
         }
     },
     beforeMount(){
+        this.user = JSON.parse(localStorage.getItem('user'))
+        console.log("sdjh");
+        
+        console.log(this.user)
+        console.log("adjk");
+        
+        this.uid = localStorage.getItem('uid')
         let eventID = this.$route.params.eventID
          db.collection('AllEvents').get().then(snapshot=>{
              snapshot.forEach(doc=>{
