@@ -114,7 +114,7 @@
                                                         label="First name"
                                                         placeholder="First name"
                                                         input-classes="form-control-alternative"
-                                                        v-model="model.firstName"
+                                                        v-model="userObj.firstName"
                                             />
                                         </div>
                                         <div class="col-lg-6">
@@ -122,7 +122,7 @@
                                                         label="Last name"
                                                         placeholder="Last name"
                                                         input-classes="form-control-alternative"
-                                                        v-model="model.lastName"
+                                                        v-model="userObj.lastName"
                                             />
                                         </div>
                                     </div>
@@ -133,68 +133,75 @@
                                                         label="Email address"
                                                         placeholder="abc@example.com"
                                                         input-classes="form-control-alternative"
-                                                        v-model="model.email"
+                                                        v-model="userObj.email"
                                             />
                                         </div>
                                          <div class="col-lg-3">
                                             <!-- <div class="row col-lg-6"> -->
                                             <h5>Registration Type</h5>
                                             <base-dropdown>
-                                            <base-button slot="title" type="default" class="dropdown-toggle ">
-                                                Events
+                                            <base-button slot="title" type="default" class="dropdown-toggle" v-if="userObj.type">
+                                               {{userObj.type}}
+                                            </base-button>
+                                            <base-button slot="title" type="default" class="dropdown-toggle" v-else>
+                                               Select Event Type
                                             </base-button>
                                             <li>
-                                                <a class="dropdown-item">
-                                                    Corporate
+                                                <a class="dropdown-item" @click="setType('DJ Party')">
+                                                    DJ Party
                                                 </a>
                                             </li>
                                             <li>
-                                                <a class="dropdown-item"  >
-                                                   Solo
+                                                <a class="dropdown-item" @click="setType('Festival celebration')" >
+                                                    Festival celebration 
                                                 </a>
                                             </li>
                                             <li>
-                                                <a class="dropdown-item"  >
-                                                   Group
+                                                <a class="dropdown-item" @click="setType('Drink party')" >
+                                                    Drink party
                                                 </a>
                                             </li>
                                             <li>
-                                                <a class="dropdown-item">
-                                                   Business
+                                                <a class="dropdown-item" @click="setType('Poet Conference')">
+                                                    Poet Conference
                                                 </a>
                                             </li>
                                         </base-dropdown>
                                     <!-- </div> -->
                                         </div>
 
-                                        <div class="col-lg-3">
+                                        <div class="col-lg-2">
                                             <!-- <div class="row col-lg-6"> -->
                                             <h5>Book tickets</h5>
-                                            <base-dropdown>
-                                            <base-button slot="title" type="default" class="dropdown-toggle ">
-                                                Tickets
+                                             <base-dropdown>
+                                            <base-button slot="title" type="default" class="dropdown-toggle" v-if="userObj.ticket">
+                                               {{userObj.ticket}}
+                                            </base-button>
+                                            <base-button slot="title" type="default" class="dropdown-toggle" v-else>
+                                               tickets
                                             </base-button>
                                             <li>
-                                                <a class="dropdown-item">
-                                                  1
+                                                <a class="dropdown-item" @click="setTicket('1')">
+                                                    1
                                                 </a>
                                             </li>
                                             <li>
-                                                <a class="dropdown-item"  >
-                                                   2
+                                                <a class="dropdown-item" @click="setTicket('2')" >
+                                                    2
                                                 </a>
                                             </li>
                                             <li>
-                                                <a class="dropdown-item"  >
-                                                   3
+                                                <a class="dropdown-item" @click="setTicket('3')" >
+                                                    3
                                                 </a>
                                             </li>
                                             <li>
-                                                <a class="dropdown-item">
-                                                   4
+                                                <a class="dropdown-item" @click="setTicket('4')">
+                                                    4
                                                 </a>
                                             </li>
                                         </base-dropdown>
+                                            
                                     <!-- </div> -->
                                         </div>
                                     </div>
@@ -215,7 +222,7 @@
                                                         label="City"
                                                         placeholder="City"
                                                         input-classes="form-control-alternative"
-                                                        v-model="model.city"
+                                                        v-model="userObj.city"
                                             />
                                         </div>
                                         <div class="col-lg-4">
@@ -223,7 +230,7 @@
                                                         label="Country"
                                                         placeholder="Country"
                                                         input-classes="form-control-alternative"
-                                                        v-model="model.country"
+                                                        v-model="userObj.country"
                                             />
                                         </div>
                                         <div class="col-lg-4">
@@ -231,7 +238,7 @@
                                                         label="Phone Number"
                                                         placeholder="Phone Number"
                                                         input-classes="form-control-alternative"
-                                                        v-model="model.phone"
+                                                        v-model="userObj.phone"
                                             />
                                         </div>
                                     </div>
@@ -241,7 +248,7 @@
                                                         label="Address"
                                                         placeholder="Address"
                                                         input-classes="form-control-alternative"
-                                                        v-model="model.username"
+                                                        v-model="userObj.address"
                                             />
                                             
                                         </div>
@@ -250,7 +257,7 @@
                                                         label="Aadhar Card Number"
                                                         placeholder="Aadhar Number"
                                                         input-classes="form-control-alternative"
-                                                        v-model="model.username"
+                                                        v-model="userObj.aadhar"
                                             />
                                             
                                         </div>
@@ -315,25 +322,36 @@ const auth = firebase.auth();
     },
     data() {
       return {
+
+          userObj:{
+            'firstname':'',
+            'lastname':'',
+            'email':'',
+            'type':'',
+            'ticket':'',
+            'city':'',
+            'country':'',
+            'phone':'',
+            'aadhar':'',
+            'address':''
+            
+          },
           eventObj:{},
-        model: {
-          username: '',
-          email: '',
-          firstName: '',
-          lastName: '',
-          address: '',
-          city: '',
-          country: '',
-          zipCode: '',
-          about: '',
-        },
         modals:{
            modal2:false
         }
+
       }
     },
     methods:{
-        
+        setType(type){
+            this.userObj.type=type
+            console.log(this.userObj.type)
+        },
+       setTicket(ticket){
+            this.userObj.ticket=ticket
+            console.log(this.userObj.ticket)
+        }
     },
     beforeMount(){
         let eventID = this.$route.params.eventID
