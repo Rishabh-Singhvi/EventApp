@@ -75,8 +75,11 @@
                                      <br>
                                      <div class="row col-lg-6">
                                             <base-dropdown>
-                                            <base-button slot="title" type="default" class="dropdown-toggle">
-                                                Select Event Type
+                                            <base-button slot="title" type="default" class="dropdown-toggle" v-if="eventObj.type">
+                                               {{eventObj.type}}
+                                            </base-button>
+                                            <base-button slot="title" type="default" class="dropdown-toggle" v-else>
+                                               Select Event Type
                                             </base-button>
                                             <li>
                                                 <a class="dropdown-item" @click="setType('DJ Party')">
@@ -99,7 +102,7 @@
                                                 </a>
                                             </li>
                                         </base-dropdown>
-                                        {{eventObj.type}}
+                                        
                                     </div>
                                 </div>
                                 <hr class="my-4" />

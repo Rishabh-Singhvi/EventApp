@@ -36,33 +36,57 @@
                         <div class="card-body pt-0 pt-md-4">
                             <div class="row">
                                 <div class="col">
-                                    <div class="card-profile-stats d-flex justify-content-center mt-md-5">
-                                       
+                                    <div class="card-profile-stats d-flex justify-content-center mt-md-1">
                                         <div>
                                             <span class="heading">Event Details</span>
                                             <span class="description">Event</span>
                                         </div>
-                                       
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="card-profile-stats d-flex justify-content-center mt-md-1">
+                                        <div>
+                                            <h4>Date</h4>
+                                            <span class="description">{{eventObj.timings.date}}</span>
+                                        </div>
+                                         <div>
+                                            <h4>Start Time</h4>
+                                            <span class="description">{{eventObj.timings.start}}</span>
+                                        </div>
+                                         <div>
+                                            <h4>End Time</h4>
+                                            <span class="description">{{eventObj.timings.end}}</span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="text-center">
-                                <h3>
-                                   <span class="font-weight-light"></span>
-                                </h3>
-                                <div class="h5 font-weight-300">
-                                    <i class="ni location_pin mr-2"></i>
-                                </div>
-                                <div class="h5 mt-4">
-                                    <i class="ni business_briefcase-24 mr-2"></i>
-                                </div>
-                                <div>
-                                    <i class="ni education_hat mr-2"></i>
-                                </div>
+                          <div class="text-center">
+                                <h4 class="h12 mt-15">
+                                    {{eventObj.title}}
+                                </h4>
+                               <p>{{eventObj.description}}</p>
+                                
+                                <h4>Venue</h4>
+                                <p>{{eventObj.address}},{{eventObj.city}},{{eventObj.state}},{{eventObj.postalCode}}</p>
                                 <hr class="my-4" />
-                                <p></p>
-                                <a href="#"></a>
-                            </div>
+                                <h4>Contact Information</h4>
+                              <div class="row">
+                                <div class="col">
+                                    <div class="card-profile-stats d-flex justify-content-center mt-md-1">
+                                        <div>
+                                            <h4>Email</h4>
+                                            <span class="description">{{eventObj.email}}</span>
+                                        </div>
+                                         <div>
+                                            <h4>Phone</h4>
+                                            <span class="description">{{eventObj.phoneNo}}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>                            </div>
                         </div>
                     </div>
                 </div>
@@ -240,21 +264,30 @@
                                 <div class="pl-lg-4">
                                     
                                 </div>
-                                <a href="#!" class="btn btn-info">Register</a>
                             </form>
                         </template>
                     </card>
+     
                 </div>
             </div>
         </div>
         
     </div>
+    
 </template>
 <script>
+
+import firebase from '@/firebase_init.js';
+let db = firebase.firestore();
+const auth = firebase.auth();
   export default {
     name: 'user-profile',
+    props:{
+       eventID:String
+    },
     data() {
       return {
+          eventObj:{},
         model: {
           username: '',
           email: '',
@@ -268,6 +301,24 @@
         }
       }
     },
+    methods:{
+        
+    },
+    beforeMount(){
+        let eventID = this.$route.params.eventID
+         db.collection('AllEvents').get().then(snapshot=>{
+             snapshot.forEach(doc=>{
+                 if(doc.id==eventID){
+                     console.log(doc.id)
+                     console.log(doc.data())
+                     this.eventObj=doc.data()
+                     console.log(this.eventObj);
+                     
+                 }
+                
+             })
+         })
+    }
   };
 </script>
 <style></style>

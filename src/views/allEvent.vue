@@ -11,12 +11,12 @@
  
                         <template slot="footer">
                             <span >Time slot : {{event.timings.start}}</span> to <span>{{event.timings.end}}</span><br>
-                            <span >Duration : {{event.timings.date}}  Hours</span>
+                            <span >Date : {{event.timings.date}} </span>
                             <br>
                             <br>
                             <p>{{event.description}}</p>
                             
-                        <base-button @click="register(event.id)" type="primary">Register</base-button>
+                        <router-link :to="{path:'/Meetup/'+event.id}"><base-button  type="primary">View Details</base-button></router-link>
 
                         </template>
                     </stats-card>
