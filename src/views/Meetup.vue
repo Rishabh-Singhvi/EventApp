@@ -405,7 +405,7 @@ const auth = firebase.auth();
                             title: 'Registered'
                             }) 
                    }).then(()=>{
-                       this.$router.push('/allEvent')
+                       this.$router.go('/User_Registrations')
                    })
                })
             })

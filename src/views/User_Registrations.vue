@@ -64,7 +64,7 @@ export default {
             event = doc.data()
             console.log(event)
             event['id']=doc.id
-            if(this.user.registeredEvents.includes(event.id))
+            if(event.status)
             this.eventList.push(event)
           })
           console.log(this.eventList)

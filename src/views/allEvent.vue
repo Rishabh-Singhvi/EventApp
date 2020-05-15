@@ -62,7 +62,7 @@ export default {
             event = doc.data()
             console.log(event)
             event['id']=doc.id
-            if(!this.user.registeredEvents.includes(event.id)){
+            if(!event.status){
             console.log("hello")
            console.log(this.user.registeredEvents)
             console.log("sns")
