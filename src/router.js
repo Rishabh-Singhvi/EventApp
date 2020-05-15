@@ -64,6 +64,16 @@ export default new Router({
           path: '/User_Registrations',
           name: 'Registrations of user',
           component: () => import(/* webpackChunkName: "demo" */ './views/User_Registrations.vue')
+        },
+        {
+          path: '/ListofUsers/:eventID',
+          name: 'List of All Participants',
+          component: () => import(/* webpackChunkName: "demo" */ './views/viewUsers.vue')
+        },
+        {
+          path: '/participant/:eventID/:uid',
+          name: 'Participants Data',
+          component: () => import(/* webpackChunkName: "demo" */ './views/participant.vue')
         }
 
 
