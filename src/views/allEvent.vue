@@ -44,11 +44,12 @@ export default {
         };
       }, 
     beforeMount(){
-      console.log(this.user)
       this.uid = localStorage.getItem('uid')
-      db.collection('users/'+this.uid).onSnapshot(snap=>{
+      console.log(this.uid)
+      db.doc('users/'+this.uid).get().then(snap=>{
         this.user=snap.data()
       })
+      console.log(this.user)
       this.getEventList()
     },
     methods:{
