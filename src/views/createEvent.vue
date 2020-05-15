@@ -201,7 +201,6 @@ const auth = firebase.auth();
             'description':'',
             'address':'',
             'city':'',
-            'status':false,
             'state':'',
             'postalCode':'',
             'type':'',

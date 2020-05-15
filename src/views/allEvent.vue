@@ -47,14 +47,11 @@ export default {
       this.uid = localStorage.getItem('uid')
       console.log(this.uid)
       db.doc('users/'+this.uid).get().then(snap=>{
+        console.log(snap.data())
         this.user=snap.data()
-      })
-      console.log(this.user)
-      this.getEventList()
-    },
-    methods:{
-      getEventList(){
-        db.collection('AllEvents').onSnapshot(snapshot=>{
+        console.log(this.user)
+      }).then(()=>{
+         db.collection('AllEvents').onSnapshot(snapshot=>{
           this.eventList = []
           let event = {}
           snapshot.forEach(doc=>{
@@ -62,16 +59,48 @@ export default {
             event = doc.data()
             console.log(event)
             event['id']=doc.id
-            if(!event.status){
-            console.log("hello")
-           console.log(this.user.registeredEvents)
-            console.log("sns")
+            if(!this.user.registeredEvents.includes(event.id)){
             this.eventList.push(event)
             }
           })
           console.log(this.eventList)
         })
-      },
+      })
+      // console.log("hello1")
+      // console.log(this.user)
+      // console.log("hello2")
+      // db.collection('AllEvents').onSnapshot(snapshot=>{
+      //     this.eventList = []
+      //     let event = {}
+      //     snapshot.forEach(doc=>{
+      //       console.log(doc.id) 
+      //       event = doc.data()
+      //       console.log(event)
+      //       event['id']=doc.id
+      //       if(!this.user.registeredEvents.includes(event.id)){
+      //       this.eventList.push(event)
+      //       }
+      //     })
+      //     console.log(this.eventList)
+      //   })
+    },
+    // methods:{
+    //   getEventList(){
+    //     db.collection('AllEvents').onSnapshot(snapshot=>{
+    //       this.eventList = []
+    //       let event = {}
+    //       snapshot.forEach(doc=>{
+    //         console.log(doc.id) 
+    //         event = doc.data()
+    //         console.log(event)
+    //         event['id']=doc.id
+    //         if(!this.user.registeredEvents.includes(event.id)){
+    //         this.eventList.push(event)
+    //         }
+    //       })
+    //       console.log(this.eventList)
+    //     })
+    //   },
     //   register(eventId){
         
     //     db.doc('tests/'+eventId).get().then(snapshot=>{
@@ -89,6 +118,6 @@ export default {
     //       })
     //     })
     //   }
-    }
+   // }
 }
 </script>

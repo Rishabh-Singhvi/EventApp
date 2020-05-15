@@ -46,17 +46,15 @@ export default {
           uid:''
         };
       }, 
-    beforeMount(){
-    // console.log(this.user)
+   beforeMount(){
       this.uid = localStorage.getItem('uid')
+      console.log(this.uid)
       db.doc('users/'+this.uid).get().then(snap=>{
+        console.log(snap.data())
         this.user=snap.data()
-      })
-      this.getEventList()
-    },
-    methods:{
-      getEventList(){
-        db.collection('AllEvents').onSnapshot(snapshot=>{
+        console.log(this.user)
+      }).then(()=>{
+         db.collection('AllEvents').onSnapshot(snapshot=>{
           this.eventList = []
           let event = {}
           snapshot.forEach(doc=>{
@@ -64,30 +62,14 @@ export default {
             event = doc.data()
             console.log(event)
             event['id']=doc.id
-            if(event.status)
+            if(this.user.registeredEvents.includes(event.id)){
             this.eventList.push(event)
+            }
           })
           console.log(this.eventList)
         })
-      },
-    //   register(eventId){
-        
-    //     db.doc('tests/'+eventId).get().then(snapshot=>{
-    //       let eventObj = snapshot.data()
-    //       eventObj.registeredUsers.push(this.uid)
-    //       console.log(eventObj)
-    //       firebaseApp.db.doc('tests/'+eventId).update({
-    //         'registeredUsers':eventObj.registeredUsers
-    //       }).then(s=>{
-    //         this.user.registeredTests.push(eventId);
-    //         firebaseApp.db.doc('users/'+this.uid).set(this.user)
-    //       }).then(s=>{
-    //         localStorage.setItem('user',JSON.stringify(this.user))
-    //         this.geteventList()
-    //       })
-    //     })
-    //   }
-    }
+      }) 
+      }
 }
 </script>
 

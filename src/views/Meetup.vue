@@ -375,7 +375,8 @@ const auth = firebase.auth();
                 'uuid':'',
                 'regID':'',
                 'dor':'',
-                'usernam':''
+                'usernam':'',
+                'status':false
                 }
             
             let regID = '_' + Math.random().toString(36).substr(2, 9);
@@ -393,7 +394,7 @@ const auth = firebase.auth();
                event.registeredUsers.push(uuser)
                console.log(event)
                db.doc('AllEvents/'+eventID).update({
-                   'registeredUsers':event.registeredUsers
+                   'registeredUsers':event.registeredUsers,
                }).then(sna=>{
                    this.user.registeredEvents.push(eventID);
                    console.log(this.user)
@@ -404,8 +405,11 @@ const auth = firebase.auth();
                             type: 'success',
                             title: 'Registered'
                             }) 
-                   }).then(()=>{
-                       this.$router.go('/User_Registrations')
+                   }).then(s=>{
+            localStorage.setItem('user',JSON.stringify(this.user))
+           
+          }).then(()=>{
+                       this.$router.push('/User_Registrations')
                    })
                })
             })
