@@ -212,6 +212,28 @@
                                 <!-- Address -->
                                 <h6 class="heading-small text-muted mb-4">Contact information</h6>
                                 <div class="pl-lg-4">
+                                      <div class="row">
+                                        <div class="col-lg-6">
+                                            <base-input alternative=""
+                                                        label="Address"
+                                                        placeholder="Address"
+                                                        input-classes="form-control-alternative"
+                                                        v-model="userObj.address"
+                                            />
+                                            
+                                        </div>
+                                         <div class="col-lg-6">
+                                            <base-input alternative=""
+                                                        label="Aadhar Card Number"
+                                                        placeholder="Aadhar Number"
+                                                        input-classes="form-control-alternative"
+                                                        v-model="userObj.aadhar"
+                                            />
+                                            
+                                        </div>
+                                       
+                                    </div>
+
                                     <div class="row">
                                         <div class="col-lg-4">
                                             <base-input alternative=""
@@ -238,27 +260,7 @@
                                             />
                                         </div>
                                     </div>
-                                      <div class="row">
-                                        <div class="col-lg-6">
-                                            <base-input alternative=""
-                                                        label="Address"
-                                                        placeholder="Address"
-                                                        input-classes="form-control-alternative"
-                                                        v-model="userObj.address"
-                                            />
-                                            
-                                        </div>
-                                         <div class="col-lg-6">
-                                            <base-input alternative=""
-                                                        label="Aadhar Card Number"
-                                                        placeholder="Aadhar Number"
-                                                        input-classes="form-control-alternative"
-                                                        v-model="userObj.aadhar"
-                                            />
-                                            
-                                        </div>
-                                       
-                                    </div>
+                                     
                                 </div>
                                 
                                 <hr class="my-4" />

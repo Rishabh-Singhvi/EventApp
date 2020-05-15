@@ -1,13 +1,15 @@
 <template>
     <div>
-        <base-header type="gradient-success" class="pb-6 pb-8 pt-5 pt-md-8">
+        <base-header type="gradient-success" class="pb-6 pb-8 pt-5 pt-md-8" >
+ 
+        
             <!-- Card stats -->
             <div class="row" >
               <div class="columns col-xl-3 col-lg-6" v-for="event in eventList" v-bind:key="event.title">
                     <stats-card type="gradient-red"
                                 :sub-title="event.title"
                                 class="mb-4 mb-xl-0"
-                                style="background-image: url(img/theme/bharath-g-s-aLGiPJ4XRO4-unsplash.jpg);background-size: cover; background-position: center top;"
+                                style="background-image: url(img/theme/back.jpg);background-size: cover; background-position: center top;margin-right:25px"                                
                     >
                 
                         <template slot="footer">
@@ -18,7 +20,8 @@
                             <br>
                             <p class="text-danger mr-4 font-weight-300">{{event.description}}</p>
                             
-                        <router-link :to="{path:'/Meetup/'+event.id}"><base-button  type="default">View Details</base-button></router-link>
+                        <!-- <router-link :to="{path:'/Meetup/'+event.id}"><base-button  type="default">View Details</base-button></router-link> -->
+                        <base-button  type="default" size="sm">View details</base-button>
 
                         </template>
                     </stats-card>
@@ -44,7 +47,7 @@ export default {
         };
       }, 
     beforeMount(){
-      // console.log(this.user)
+    // console.log(this.user)
       this.uid = localStorage.getItem('uid')
       db.doc('users/'+this.uid).get().then(snap=>{
         this.user=snap.data()
@@ -61,12 +64,8 @@ export default {
             event = doc.data()
             console.log(event)
             event['id']=doc.id
-            if(!this.user.registeredEvents.includes(event.id)){
-            console.log("hello")
-           console.log(this.user.registeredEvents)
-            console.log("sns")
+            if(this.user.registeredEvents.includes(event.id))
             this.eventList.push(event)
-            }
           })
           console.log(this.eventList)
         })
@@ -91,3 +90,4 @@ export default {
     }
 }
 </script>
+
