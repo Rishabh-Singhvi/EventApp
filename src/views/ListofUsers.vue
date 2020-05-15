@@ -20,8 +20,8 @@
                             <br>
                             <p class="text-danger mr-4 font-weight-300">{{event.description}}</p>
                             
-                        <!-- <router-link :to="{path:'/Meetup/'+event.id}"><base-button  type="default">View Details</base-button></router-link> -->
-                        <base-button  type="default" size="sm">View Participants</base-button>
+                        <router-link :to="{path:'/ListofUsers/'+event.id}"><base-button  type="default">View Details</base-button></router-link>
+                        
 
                         </template>
                     </stats-card>

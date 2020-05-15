@@ -21,19 +21,19 @@
                 <div class="col-xl-4 order-xl-2 mb-5 mb-xl-0">
 
                     <div class="card card-profile shadow">
-                        <div class="row justify-content-center">
+                        <div class="row justify-content-center" >
                             <div class="col-lg-3 order-lg-2">
                                 <div class="card-profile-image">
-                                    <a href="#">
+                                    
                                         <img src="img/theme/d.jpg" class="rounded-circle">
-                                    </a>
+                                   
                                 </div>
                             </div>
                         </div>
-                        <div class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
+                        <div class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4" style="background-image: url(img/theme/bharath-g-s-aLGiPJ4XRO4-unsplash.jpg; background-size: cover; background-position: center top;">
                             
                         </div>
-                        <div class="card-body pt-0 pt-md-4">
+                        <div class="card-body pt-0 pt-md-4" style="background-image: url(img/theme/bharath-g-s-aLGiPJ4XRO4-unsplash.jpg; background-size: cover; background-position: center top;">
                             <div class="row">
                                 <div class="col">
                                     <div class="card-profile-stats d-flex justify-content-center mt-md-1">
@@ -369,7 +369,6 @@ const auth = firebase.auth();
             let dd = String(today.getDate()).padStart(2, '0');
             let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
             let yyyy = today.getFullYear();
-
             today = mm + '/' + dd + '/' + yyyy;
             let uuser = {
                 'uuid':'',
@@ -400,7 +399,7 @@ const auth = firebase.auth();
                    console.log(this.user)
                    db.doc('users/'+this.uid).set(this.user)
                    this.userObj.registrationNo=regID
-                   db.doc('AllUsers/'+this.uid).set(this.userObj).then(sn=>{
+                   db.collection('AllUsers/'+this.uid+'/'+eventID).add(this.userObj).then(sn=>{
                        this.$notify({
                             type: 'success',
                             title: 'Registered'
