@@ -54,7 +54,19 @@ export default new Router({
           path: '/allEvent',
           name: 'All Event',
           component: () => import(/* webpackChunkName: "demo" */ './views/allEvent.vue')
+        },
+        {
+          path: '/ListofUsers',
+          name: 'ListofUsers',
+          component: () => import(/* webpackChunkName: "demo" */ './views/ListofUsers.vue')
+        },
+        {
+          path: '/User_Registrations',
+          name: 'Registrations of user',
+          component: () => import(/* webpackChunkName: "demo" */ './views/User_Registrations.vue')
         }
+
+
       ]
     },
     {
