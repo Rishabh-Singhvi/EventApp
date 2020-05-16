@@ -66,7 +66,7 @@ export default new Router({
           component: () => import(/* webpackChunkName: "demo" */ './views/User_Registrations.vue')
         },
         {
-          path: '/EachEventDetail',
+          path: '/EachEventDetail/:eventID',
           name: 'Details of events registered by user',
           component: () => import(/* webpackChunkName: "demo" */ './views/EachEventDetail.vue')
 },
