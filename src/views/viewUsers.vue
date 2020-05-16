@@ -1,8 +1,10 @@
 <template>
+            
     <div>
         <base-header type="gradient-success" class="pb-6 pb-8 pt-5 pt-md-8">
             <!-- Card stats -->
-           <div class="card shadow col-xl-8 mb-5 mb-xl-0"
+        <div class="row">
+           <div class="card shadow col-xl-8 mb-4 mb-xl-0"
        :class="type === 'dark' ? 'bg-default': ''">
     <div class="card-header border-0"
          :class="type === 'dark' ? 'bg-transparent': ''">
@@ -52,22 +54,44 @@
       </base-table>
     </div>
 
-    <div class="card-footer d-flex justify-content-end"
-         :class="type === 'dark' ? 'bg-transparent': ''">
-      <base-pagination total="30"></base-pagination>
-    </div>
-
   </div>
+   <div class="col-xl-4">
+                    <card header-classes="bg-transparent">
+                        <div slot="header" class="row align-items-center">
+                            <div class="col">
+                                <h6 class="text-uppercase text-muted ls-1 mb-1">Performance</h6>
+                                <h5 class="h3 mb-0">Total orders</h5>
+                            </div>
+                        </div>
 
+                        <bar-chart
+                                :height="350"
+                                ref="barChart"
+                                :chart-data="redBarChart.chartData"
+                        >
+                        </bar-chart>
+                    </card>
+                </div>
+
+        </div>
         </base-header>
+
     </div>
+        
 </template>
 <script>
+  import * as chartConfigs from '@/components/Charts/config';
+ 
+  import BarChart from '@/components/Charts/BarChart';
 import firebase from '@/firebase_init.js';
 let db = firebase.firestore();
 const auth = firebase.auth();
   export default {
     name: 'projects-table',
+    components: {
+      
+      BarChart,
+    },
     props: {
       type: {
         type: String,
@@ -79,7 +103,20 @@ const auth = firebase.auth();
       return {
         eveid:'',
         tableData:[],
-        // tableData: [
+        countSelf:0,
+        countGroup:0,
+        countCorporate:0,
+        countOthers:0,
+        redBarChart: {
+          chartData: {
+            labels: ['Self', 'Group', 'Corporate', 'Others'],
+            datasets: [{
+              label: 'Registration Type',
+              data: []
+            }]
+          }
+        }
+        // // tableData: [
         //   {
         //     img: 'img/theme/bootstrap.jpg',
         //     title: 'Argon Design System',
@@ -135,6 +172,29 @@ const auth = firebase.auth();
                     this.eveid=doc.id
                 }
             })
+        }).then(()=>{
+          this.tableData.forEach(ele=>{
+            if(ele.regType=='Self'){
+              console.log(ele.regType)
+               this.countSelf++
+               console.log(this.countSelf)
+            }
+            if(ele.regType=='Group'){
+               this.countGroup++
+            }
+            if(ele.regType=='Corporate'){
+                 this.countCorporate++
+            }
+            if(ele.regType=='Others'){
+                this.countOthers++
+            }
+          })
+            this.redBarChart.chartData.datasets[0].data.splice(0,0,this.countSelf)
+            this.redBarChart.chartData.datasets[0].data.splice(1,0,this.countGroup)
+            this.redBarChart.chartData.datasets[0].data.splice(2,0,this.countCorporate)
+            this.redBarChart.chartData.datasets[0].data.splice(3,0,this.countOthers)
+            console.log(
+            this.redBarChart.chartData.datasets[0].data)
         })
 
     }

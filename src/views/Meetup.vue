@@ -375,7 +375,7 @@ const auth = firebase.auth();
                 'regID':'',
                 'dor':'',
                 'usernam':'',
-                'status':false
+                'regType':''
                 }
             
             let regID = '_' + Math.random().toString(36).substr(2, 9);
@@ -389,6 +389,7 @@ const auth = firebase.auth();
                uuser.regID=regID
                uuser.dor=today
                uuser.usernam=this.user.name
+               uuser.regType=this.userObj.type
                console.log(uuser)
                event.registeredUsers.push(uuser)
                console.log(event)
