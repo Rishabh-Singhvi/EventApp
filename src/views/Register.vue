@@ -19,19 +19,44 @@
                         <small>Or sign up with credentials</small>
                     </div>
                     <form role="form">
-
+                        
+                         <div class="col-lg-14 text-center">
+                                            <!-- <div class="row col-lg-6"> -->
+                                            <h5>Register As</h5>
+                                            <base-dropdown >
+                                            <base-button slot="title" type="default" class="dropdown-toggle" v-if="type">
+                                               {{type}}
+                                            </base-button>
+                                            <base-button slot="title" type="default" class="dropdown-toggle" v-else>
+                                               Select 
+                                            </base-button>
+                                            <li>
+                                                <a class="dropdown-item" @click="setType('User')">
+                                                   User
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a class="dropdown-item" @click="setType('Admin')" >
+                                                   Admin
+                                                </a>
+                                            </li>
+                                          
+                                        </base-dropdown>
+                                    <!-- </div> -->
+                                        </div>
+                                        <br>
                         <base-input class="input-group-alternative mb-3"
                                     placeholder="Name"
                                     addon-left-icon="ni ni-hat-3"
                                     v-model="name">
                         </base-input>
-
+                 
                         <base-input class="input-group-alternative mb-3"
                                     placeholder="Email"
                                     addon-left-icon="ni ni-email-83"
                                     v-model="email">
                         </base-input>
-
+                        
                         <base-input class="input-group-alternative"
                                     placeholder="Password"
                                     type="password"
@@ -83,10 +108,15 @@ const auth = firebase.auth();
         email: '',
         password: '',
         error:'',
+        type:'',
         userData:{}
       }
     },
     methods:{
+        setType(type){
+            this.type=type
+            console.log(this.type)
+        },
         loginGoogle(){
             var provider = new firebase.auth.GoogleAuthProvider();
             auth.signInWithPopup(provider)
@@ -98,6 +128,7 @@ const auth = firebase.auth();
                         return db.doc("users/"+ user.uid).set({
                             name : user.displayName,
                             email: user.email,
+                            type:user.type,
                             registeredEvents:[],
                             photoURL:user.photoURL
                         })
@@ -119,6 +150,7 @@ const auth = firebase.auth();
                 let userData= {
                     name : this.name,
                     email: this.email,
+                    type: this.type,
                     registeredEvents:[],
                     photoURL:''
                 }
@@ -132,6 +164,19 @@ const auth = firebase.auth();
             .catch(err=>{
                 this.error = err.message
                 console.log(err)
+            })
+            auth.onAuthStateChanged(firebaseUser=>{
+                if (firebaseUser) {
+                        firebaseUser.sendEmailVerification().then(function() {
+                            console.log('send Verification');
+                            //document.getElementById("verifMessage").innerHTML = "Check your inbox for verification email!";
+                        }, function(error) {
+                            console.log('not send Verification');
+                        });
+                    } else {
+                        console.log('not logged in');
+                        //document.getElementById('btnLogout').style.display = 'none';
+                    }
             })
         }
     }

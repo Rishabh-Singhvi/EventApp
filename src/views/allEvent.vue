@@ -36,6 +36,7 @@ import firebase from '@/firebase_init.js';
 let db = firebase.firestore();
 const auth = firebase.auth();
 export default {
+  name:'All Event',
        data() {
         return {
           user:{},

@@ -304,6 +304,10 @@
                             
 
                             <template slot="footer">
+                                <loading :active.sync="isLoading" 
+                                    :can-cancel="true" 
+                                    :on-cancel="onCancel"
+                                    :is-full-page="fullPage"></loading>
                                 <base-button type="white" @click="register(eventID)">Register</base-button>
                                 <base-button type="link"
                                             text-color="white"
@@ -322,18 +326,25 @@
     
 </template>
 <script>
-
+import Loading from 'vue-loading-overlay';
+    // Import stylesheet
+import 'vue-loading-overlay/dist/vue-loading.css';
 import firebase from '@/firebase_init.js';
 let db = firebase.firestore();
 const auth = firebase.auth();
+
   export default {
     name: 'user-profile',
     props:{
        eventID:String
     },
+    components: {
+            Loading
+        },
+ 
     data() {
       return {
-
+          isLoading: false,
           userObj:{
             'first':'',
             'last':'',
@@ -364,6 +375,7 @@ const auth = firebase.auth();
             this.userObj.ticket=ticket
         },
         register(){
+            this.isLoading = true;
             let eventID = this.$route.params.eventID
             let today = new Date();
             let dd = String(today.getDate()).padStart(2, '0');
@@ -406,6 +418,7 @@ const auth = firebase.auth();
                             title: 'Registered'
                             }) 
                    }).then(s=>{
+                       this.isLoading = false
             localStorage.setItem('user',JSON.stringify(this.user))
            
           }).then(()=>{

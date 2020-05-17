@@ -53,9 +53,9 @@
 
       </base-table>
     </div>
-
+    
   </div>
-   <div class="col-xl-4">
+        <div class="col-xl-4" v-if="modals.modal1">
                     <card header-classes="bg-transparent">
                         <div slot="header" class="row align-items-center">
                             <div class="col">
@@ -72,8 +72,14 @@
                         </bar-chart>
                     </card>
                 </div>
+   
 
         </div>
+        <br>
+        <base-button  type="default" v-if="modals.modal1==false" @click="showChart">View Chart</base-button>
+        <base-button  type="default" v-else disabled >View Chart</base-button>
+        <base-button  type="default" v-if="modals.modal1==true" @click="hideChart">Hide Chart</base-button>
+        <base-button  type="default" v-else disabled >Hide Chart</base-button>
         </base-header>
 
     </div>
@@ -102,6 +108,9 @@ const auth = firebase.auth();
     data() {
       return {
         eveid:'',
+        modals:{
+          modal1:false
+        },
         tableData:[],
         countSelf:0,
         countGroup:0,
@@ -172,7 +181,13 @@ const auth = firebase.auth();
                     this.eveid=doc.id
                 }
             })
-        }).then(()=>{
+        })
+        
+
+    },
+    methods:{
+         showChart(){
+           this.modals.modal1=true
           this.tableData.forEach(ele=>{
             if(ele.regType=='Self'){
               console.log(ele.regType)
@@ -195,8 +210,21 @@ const auth = firebase.auth();
             this.redBarChart.chartData.datasets[0].data.splice(3,0,this.countOthers)
             console.log(
             this.redBarChart.chartData.datasets[0].data)
-        })
-
+            
+         },
+         hideChart(){
+           this.modals.modal1=false
+            this.countSelf=0
+            this.countGroup=0
+            this.countCorporate=0
+            this.countOthers=0
+            this.redBarChart.chartData.datasets[0].data.splice(0,0,this.countSelf)
+            this.redBarChart.chartData.datasets[0].data.splice(1,0,this.countGroup)
+            this.redBarChart.chartData.datasets[0].data.splice(2,0,this.countCorporate)
+            this.redBarChart.chartData.datasets[0].data.splice(3,0,this.countOthers)
+            
+         }
+         
     }
 
   }

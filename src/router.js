@@ -62,7 +62,7 @@ export default new Router({
         },
         {
           path: '/User_Registrations',
-          name: 'Registrations of user',
+          name: 'Registered Events',
           component: () => import(/* webpackChunkName: "demo" */ './views/User_Registrations.vue')
         },
         {

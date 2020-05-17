@@ -175,6 +175,10 @@
                         </template>
                     </card>
                     <br>
+                      <loading :active.sync="isLoading" 
+                                    :can-cancel="true" 
+                                    :on-cancel="onCancel"
+                                    :is-full-page="fullPage"></loading>
                     <base-button type="success" @click="create">Create</base-button>
                 </div>
             </div>
@@ -182,6 +186,9 @@
     </div>
 </template>
 <script>
+import Loading from 'vue-loading-overlay';
+    // Import stylesheet
+import 'vue-loading-overlay/dist/vue-loading.css';
 import flatPicker from "vue-flatpickr-component";
 import "flatpickr/dist/flatpickr.css";
 import VueTimepicker from 'vue2-timepicker'
@@ -193,9 +200,11 @@ const auth = firebase.auth();
   export default {
     name: 'user-profile',
     components: {flatPicker,
-    VueTimepicker},
+    VueTimepicker,
+    Loading},
     data() {
       return {
+          isLoading: false,
         eventObj:{
             'title':'',
             'description':'',
@@ -225,10 +234,12 @@ const auth = firebase.auth();
             console.log(this.eventObj.type)
         },
         create(){
+            this.isLoading = true;
         console.log(this.eventObj)
         db.collection('AllEvents').add(this.eventObj).then(snapshot=>{
             console.log(snapshot)
             console.log(snapshot.id)
+            this.isLoading = false;
             this.$notify({
                 type: 'success',
                 title: 'Event Created'

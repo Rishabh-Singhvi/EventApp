@@ -8,14 +8,16 @@
       <template slot="links">
         <sidebar-item
           :link="{
-            name: 'Dashboard',
+            name: 'All Events',
             icon: 'ni ni-tv-2 text-primary',
-            path: '/dashboard'
+            path: '/allEvent'
+            
           }"
+          v-if="udata.type=='User'" 
         />
 
-        <sidebar-item :link="{name: 'Icons', icon: 'ni ni-planet text-blue', path: '/icons'}"/>
-        <sidebar-item :link="{name: 'Maps', icon: 'ni ni-pin-3 text-orange', path: '/maps'}"/>
+        <sidebar-item v-if="udata.type=='User'" :link="{name: 'Registered Events', icon: 'ni ni-planet text-blue', path: '/User_Registrations'}"/>
+        <sidebar-item v-if="udata.type=='Admin'" :link="{name: 'Create Event', icon: 'ni ni-pin-3 text-orange', path: '/createEvent'}"/>
         <sidebar-item :link="{name: 'User Profile', icon: 'ni ni-single-02 text-yellow', path: '/profile'}"/>
         <sidebar-item :link="{name: 'Tables', icon: 'ni ni-bullet-list-67 text-red', path: '/tables'}"/>
         <sidebar-item :link="{name: 'Login', icon: 'ni ni-key-25 text-info', path: '/login'}"/>
@@ -40,6 +42,9 @@
   import DashboardNavbar from './DashboardNavbar.vue';
   import ContentFooter from './ContentFooter.vue';
   import { FadeTransition } from 'vue2-transitions';
+  import firebase from '@/firebase_init.js';
+let db = firebase.firestore();
+const auth = firebase.auth();
 
   export default {
     components: {
@@ -49,6 +54,8 @@
     },
     data() {
       return {
+        uid:'',
+        udata:{},
         sidebarBackground: 'vue' //vue|blue|orange|green|red|primary
       };
     },
@@ -58,6 +65,13 @@
           this.$sidebar.displaySidebar(false);
         }
       }
+    },
+    beforeMount(){
+         this.uid = localStorage.getItem('uid')
+         db.doc('users/'+this.uid).get().then(snap=>{
+           this.udata=snap.data()
+           console.log(this.udata)
+         })
     }
   };
 </script>
