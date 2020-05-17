@@ -282,12 +282,13 @@
                     </card>
                     <br>
                        <div class="col-md-3">
-                        <base-button block type="warning" class=" mb-3" @click="modals.modal2 = true">
+                        <base-button block type="warning" class=" mb-3" @click="Correct()">
                             Submit
                         </base-button>
 
-                        <modal :show.sync="modals.modal2"
-                            gradient="danger"
+                    
+                            <modal :show.sync="modals.modal2"
+                            gradient="warning"
                             modal-classes="modal-danger modal-dialog-centered">
                             <h6 slot="header" class="modal-title heading mt-1" id="modal-title-notification">Preview</h6>
                             <div class="py-3 text-center">
@@ -325,6 +326,38 @@
                                 </base-button>
                             </template>
                         </modal>
+                        
+
+
+
+
+                
+                <modal :show.sync="modals.modl1"
+                            gradient="warning"
+                            modal-classes="modal-danger modal-dialog-centered">
+                            <h6 slot="header" class="modal-title heading mt-1" id="modal-title-notification">Error</h6>
+                            <div class="py-3 text-center">a
+                                <i class="ni ni-circle-08 ni-3x"></i>
+                                <h4 class="heading mt-4">All fields are required.</h4>
+                                <p>Please fill all the fields.</p>
+                            </div>
+                            
+
+                            <template slot="footer">
+                              
+                                <base-button type="link"
+                                            text-color="white"
+                                            class="ml-auto"
+                                            @click="modals.modal1 = false">
+                                    Back to form
+                                </base-button>
+                            </template>
+                        </modal> 
+                    
+
+
+
+
                    </div>
                 </div>
             </div>
@@ -378,6 +411,7 @@ extend('required', {
             },
           eventObj:{},
         modals:{
+           modal1:false,
            modal2:false
         },
           user:{},
@@ -386,6 +420,16 @@ extend('required', {
       }
     },
     methods:{
+        Correct(){
+            if(this.userObj.first)
+            {
+                this.modals.modal2=true;
+            }
+            else
+            {
+                this.modals.modal1=true;
+            }
+        },
         setType(type){
             this.userObj.type=type
         },
