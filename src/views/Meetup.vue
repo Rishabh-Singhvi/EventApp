@@ -252,8 +252,8 @@
                                                         v-model="userObj.state"
                                             />
                                         </div>
-                                        <ValidationProvider  rules="required|Phone Number">
-                                        <div class="col-lg-18" slot-scope="{ errors }">
+                                        
+                                        <div class="col-lg-18">
                                             
                                             <base-input alternative=""
                                                         label="Phone Number"
@@ -261,10 +261,10 @@
                                                         input-classes="form-control-alternative"
                                                         v-model="userObj.phone"
                                             />
-                                            <span>{{ errors[0] }}</span>
+                                            
                                             
                                         </div>
-                                        </ValidationProvider>
+                                        
                                         
                                         
                                     </div>
@@ -282,7 +282,7 @@
                     </card>
                     <br>
                        <div class="col-md-3">
-                        <base-button block type="warning" class=" mb-3" @click="modals.modal2 = true">
+                        <base-button block type="warning" class=" mb-3" @click="mode">
                             Submit
                         </base-button>
 
@@ -325,6 +325,25 @@
                                 </base-button>
                             </template>
                         </modal>
+                        <modal :show.sync="modals.modal1"
+                            gradient="danger"
+                            modal-classes="modal-danger modal-dialog-centered">
+                            <h6 slot="header" class="modal-title heading mt-1" id="modal-title-notification">Preview</h6>
+                            <div class="py-3 text-center">
+                                <i class="ni ni-circle-08 ni-3x"></i>
+                                <h4 class="heading mt-4"></h4>
+                                <p>All fields are mandatory</p>
+                            </div>
+                            
+
+                            <template slot="footer">
+                                <loading :active.sync="isLoading" 
+                                    :can-cancel="true" 
+                                    :on-cancel="onCancel"
+                                    :is-full-page="fullPage"></loading>
+                                <base-button type="white" @click="modals.modal1 = false">Close</base-button>
+                            </template>
+                        </modal>
                    </div>
                 </div>
             </div>
@@ -334,21 +353,17 @@
     
 </template>
 <script>
-import { ValidationProvider } from 'vee-validate';
+
 import Loading from 'vue-loading-overlay';
     // Import stylesheet
 import 'vue-loading-overlay/dist/vue-loading.css';
 import firebase from '@/firebase_init.js';
 let db = firebase.firestore();
 const auth = firebase.auth();
-import { extend } from 'vee-validate';
-import { required } from 'vee-validate/dist/rules';
+
  
 // Add the required rule
-extend('required', {
-  ...required,
-  message: 'This field is required'
-});
+
 
   export default {
     name: 'user-profile',
@@ -357,7 +372,7 @@ extend('required', {
     },
     components: {
             Loading,
-            ValidationProvider
+            
         },
  
     data() {
@@ -378,7 +393,8 @@ extend('required', {
             },
           eventObj:{},
         modals:{
-           modal2:false
+           modal2:false,
+           modal1:false
         },
           user:{},
           uid:''
@@ -391,6 +407,14 @@ extend('required', {
         },
        setTicket(ticket){
             this.userObj.ticket=ticket
+        },
+        mode(){
+             if(this.userObj.first!=''&&this.userObj.last!=''&&this.userObj.type!=''&&this.userObj.ticket!=''&&this.userObj.email!=''&&this.userObj.phone!=''&&this.userObj.aadhar!=''&&this.userObj.address!=''&&this.userObj.state!=''&&this.userObj.city!=''){
+                 this.modals.modal2=true
+             }
+             else{
+                 this.modals.modal1=true
+             }
         },
         register(){
             this.isLoading = true;

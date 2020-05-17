@@ -9,7 +9,7 @@
                     <stats-card type="gradient-red"
                                 :sub-title="event.title"
                                 class="mb-4 mb-xl-0"
-                                style="background-image: url(img/theme/back.jpg);background-size: cover; background-position: center top;margin-right:25px"                                
+                                style="background-image: url(img/theme/bharath-g-s-aLGiPJ4XRO4-unsplash.jpg);background-size: cover; background-position: center top;margin-right:25px"                                
                     >
                 
                         <template slot="footer">

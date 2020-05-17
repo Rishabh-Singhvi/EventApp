@@ -71,9 +71,33 @@
                                 </base-checkbox>
                             </div>
                         </div>
-                        <div class="text-center">
-                            <base-button @click=createAccount type="primary" class="my-4">Create account</base-button>
-                        </div>
+                         <div class="col-md-7">
+                        <base-button type="primary" class=" mb-10" @click=createAccount>
+                            Create Account
+                        </base-button>
+
+                        <modal :show.sync="modals.modal2"
+                            gradient="danger"
+                            modal-classes="modal-danger modal-dialog-centered">
+                            <h6 slot="header" class="modal-title heading mt-1" id="modal-title-notification">Alert</h6>
+                            <div class="py-3 text-center">
+                                <i class="ni ni-circle-08 ni-3x"></i>
+                                
+                                <p>All Fields Are Mandatory</p>
+                            </div>
+                           
+
+                            <template slot="footer">
+                                <base-button type="link"
+                                            text-color="white"
+                                            class="ml-auto"
+                                            @click="modals.modal2 = false">
+                                    Close
+                                </base-button>
+                            </template>
+                        </modal>
+                       
+                   </div>
                         <base-alert type="warning" v-if="error">
                             <strong>{{error}}</strong>
                         </base-alert>
@@ -109,7 +133,10 @@ const auth = firebase.auth();
         password: '',
         error:'',
         type:'',
-        userData:{}
+        userData:{},
+         modals:{
+           modal2:false
+        },
       }
     },
     methods:{
@@ -145,6 +172,7 @@ const auth = firebase.auth();
             })
         },
         createAccount(){
+            if(this.name!=''&&this.type!=''&&this.password!=''&&this.email!=''){
             auth.createUserWithEmailAndPassword(this.email,this.password).then(user=>{
                 console.log(user)
                 let userData= {
@@ -178,6 +206,10 @@ const auth = firebase.auth();
                         //document.getElementById('btnLogout').style.display = 'none';
                     }
             })
+            }
+            else{
+                this.modals.modal2=true
+            }
         }
     }
   }
