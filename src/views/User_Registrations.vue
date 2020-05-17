@@ -9,7 +9,7 @@
                     <stats-card type="gradient-red"
                                 :sub-title="event.title"
                                 class="mb-4 mb-xl-0"
-                                style="background-image: url(img/theme/back.jpg);background-size: cover; background-position: center top;margin-right:25px"                                
+                                style="background-image: url(img/theme/bharath-g-s-aLGiPJ4XRO4-unsplash.jpg);background-size: cover; background-position: center top;margin-right:25px"                                
                     >
                 
                         <template slot="footer">
@@ -20,8 +20,8 @@
                             <br>
                             <p class="text-danger mr-4 font-weight-300">{{event.description}}</p>
                             
-                        <!-- <router-link :to="{path:'/Meetup/'+event.id}"><base-button  type="default">View Details</base-button></router-link> -->
-                        <base-button  type="default" size="sm">View details</base-button>
+                        <router-link :to="{path:'/EachEventDetail/'+event.id}"><base-button  type="default">View Details</base-button></router-link>
+                        <!-- <base-button  type="default" size="sm">View details</base-button> -->
 
                         </template>
                     </stats-card>

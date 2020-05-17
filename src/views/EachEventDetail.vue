@@ -5,232 +5,179 @@
             <!-- Mask -->
             <!-- <span class="mask bg-gradient-success opacity-1"></span> -->
             <!-- Header container -->
-                          <div class="card card-profile shadow">
+                         <span class="mask bg-gradient-success opacity-2"></span>
+            <!-- Header container -->
+            <div class="container-fluid d-flex align-items-center">
+                <div class="row">
+                    <div class="col-lg-10 col-md-5">
+                        <h6 class="display-4 text-white">Here are your registered event's and your details</h6>
+                        <p></p>
+                        
+                    </div>
+                </div>
+            </div>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <div class="container-fluid mt--7" >
+            <div class="row">
+             <div class="col-xl-4 order-xl-2 mb-5 mb-xl-0">
+
+                    <div class="card card-profile shadow">
+                        <div class="row justify-content-center" >
+                            <div class="col-lg-3 order-lg-2">
+                                <div class="card-profile-image">
+                                    
+                                        <img src="img/theme/d.jpg" class="rounded-circle">
+                                   
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4" style="background-image: url(img/theme/bharath-g-s-aLGiPJ4XRO4-unsplash.jpg; background-size: cover; background-position: center top;">
+                            
+                        </div>
+                        <div class="card-body pt-0 pt-md-4" style="background-image: url(img/theme/bharath-g-s-aLGiPJ4XRO4-unsplash.jpg; background-size: cover; background-position: center top;">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="card-profile-stats d-flex justify-content-center mt-md-1">
+                                        <div>
+                                            <span class="heading">Event Details</span>
+                                            <span class="description">Event</span>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="card-profile-stats d-flex justify-content-center mt-md-1">
+                                        <div>
+                                            <h5>Date</h5>
+                                            <span class="ni education_hat mr-2">{{eventObj.timings.date}}</span>
+                                        </div>
+                                         <div>
+                                            <h5>Start Time</h5>
+                                            <span class="ni education_hat mr-2">{{eventObj.timings.start}}</span>
+                                        </div>
+                                         <div>
+                                            <h5>End Time</h5>
+                                            <span class="ni education_hat mr-2">{{eventObj.timings.end}}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                          <div class="text-center">
+                                <h4 class="h12 mt-15">
+                                    {{eventObj.title}}
+                                </h4>
+                               <p>{{eventObj.description}}</p>
+                                
+                                <h4>Venue</h4>
+                                <p>{{eventObj.address}},{{eventObj.city}},{{eventObj.state}},{{eventObj.postalCode}}</p>
+                                <hr class="my-4" />
+                                <h4>Contact Information</h4>
+                              <div class="row">
+                                <div class="col">
+                                    <div class="card-profile-stats d-flex justify-content-center mt-md-1">
+                                        <div>
+                                            <h4>Email</h4>
+                                            <span class="ni education_hat mr-2">{{eventObj.email}}</span>
+                                        </div>
+                                         <div>
+                                            <h4>Phone</h4>
+                                            <span class="ni education_hat mr-2">{{eventObj.phoneNo}}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <div class="col-xl-8 order-xl-2 mb-5 mb-xl-0">
+
+                    <div class="card card-profile shadow" style="background-image: url(img/theme/bharath-g-s-aLGiPJ4XRO4-unsplash.jpg; background-size: cover; background-position: center top;">
                         <div class="row justify-content-center">
                             <div class="col-lg-3 order-lg-2">
                                 <div class="card-profile-image">
-                                    <a href="#">
-                                        <img src="img/theme/12.jpg" class="rounded-square" style="min-height: 150px;min-width: 450px">
-                                    </a>                   
-                                
-                            </div>
-                            </div>
-                        </div>
-                    </div>
-                    <br>
-                    <br>
-                    <br>
-                     <br>
-                    <br>
-                    <br>
-            <div class="container-fluid d-flex align-items-center" >
-               
-            </div>
-        </base-header>
-
-        <div class="container-fluid mt--7"  style="min-height: 200px; background-image: url(img/theme/a.jpg); background-size: cover; background-position: center top;">
-            <div class="row">
-        
-
-                <div class="col-xl-12 order-xl-1"  >
-                    
-                    <card shadow type="secondary" >
-                      
-                        <template >
-                            
-                            <form @submit.prevent  style="min-height: 600px; background-image: url(img/theme/1.jpg); background-size: cover; background-position: center top;">
-                                <h2 style="padding-left:21px;padding-top:20px;padding-bottom:0px;r">  Event Information</h2>
-                                 <div class="card card-profile shadow">
-                        <div class="row justify-content-center">
-                            <div class="col-lg-3 order-lg-2">
-                                <div class="card-profile-image" style="padding-bottom:0px">
-                                    <a href="#">
-                                        <img src="img/theme/45.jpg" class="rounded-circle" >
-                                    </a>                     
-                            </div>
-                            </div>
-                        </div>
-                    </div>
-
-  <br>
-                      <br>
-                      <br>
-                      <br>
-                      <br>
-                                
-                                <div v-for="event in eventList" v-bind:key="event.title">
-                                           
-                                            
-                                 <div class="pl-lg-4">     
-
-
-         <div class="row justify-content-center"  style="margin-right:20px;" >
-        <div class="col-lg-5 col-md-7">
-            <div class="card bg-secondary shadow border-0">
-                <div class="card-header bg-transparent pb-5"  style="min-height: 100px; background-image: url(img/theme/15.jpg); background-size: cover; background-position: center top;color:black">
-                           
-                                           <div class="row">
-                                                <div class="column"  style="padding-left:20px">Title   </div>
-                                                 <div class="column"  style="padding-left:50px">{{event.title}}</div>
-                                           </div>
-
-                                            <div class="row">
-                                                <div class="column"  style="padding-left:20px">Date   </div>
-                                                 <div class="column"  style="padding-left:45px">{{event.timings.date}}</div>
-                                           </div>
-
-                                           <div class="row">
-                                                <div class="column"  style="padding-left:20px">Details   </div>
-                                                 <div class="column"  style="padding-left:30px">{{event.description}}</div>
-                                           </div>
-
-                                            <div class="row">
-                                                <div class="column"  style="padding-left:20px">Type  </div>
-                                                 <div class="column"  style="padding-left:45px">{{event.type}}</div>
-                                           </div>
-
-                                           <div class="row">
-                                                <div class="column"  style="padding-left:20px">City  </div>
-                                                 <div class="column"  style="padding-left:50px">{{event.city}}</div>
-                                          </div>                           
-
-                </div>
-            </div>
-        </div>
-    </div>            
-
-    
-                                                        
-                               
-                                     <h2 style="padding-left:0px;padding-top:20px;align:center" >Contact Information</h2>
-                                       <div class="card card-profile shadow">
-                        <div class="row justify-content-center">
-                            <div class="col-lg-3 order-lg-2">
-                                <div class="card-profile-image" style="padding-bottom:0px">
-                                    <a href="#">
-                                        <img src="img/theme/23.png" class="rounded-circle" >
-                                    </a>                     
-                            </div>
-                            </div>
-                        </div>
-                    </div>
-
-  <br>
-                      <br>
-                      <br>
-                      <br>
-                      <br>
-
-                               
-                                 <div class="pl-lg-4">
-
-                                    
-         <div class="row justify-content-center" style="margin-bottom:70px;padding-bottom:0px;margin-right:50px;margin-left:0px" >
-        <div class="col-lg-5 col-md-7">
-            <div class="card bg-secondary shadow border-0" style="min-height: 50px; background-image: url(img/theme/15.jpg); background-size: cover; background-position: center top;color:black">
-               
-                                   
-                                         <div class="row">
-                                                <div class="column"  style="padding-left:20px;padding-bottom:10px">Email  </div>
-                                                 <div class="column"  style="padding-left:45px;padding-bottom:10px">{{event.email}}</div>
-                                           </div>
-
-                                           <div class="row">
-                                                <div class="column"  style="padding-left:20px">Phone No.  </div>
-                                                 <div class="column"  style="padding-left:10px">{{event.phoneNo}}</div>
-                                          </div>
-
-                                 </div>
-
-                                    
-                                    
-                                     
-                                  </div>
-                                 </div>                      
-
                 
-            </div>
-        </div>
-    </div>
-              
-                                
-     <h2 style="padding-left:21px;padding-top:20px;padding-bottom:0px;r">  User Details</h2>                            
-
-                               
-                                <!-- Address -->
-                       <div class="card card-profile shadow">
-                        <div class="row justify-content-center">
-                            <div class="col-lg-3 order-lg-2">
-                                <div class="card-profile-image" style="padding-bottom:0px">
-                                    <a href="#">
-                                        <img src="img/theme/26.jpg" class="rounded-circle" >
-                                    </a>                     
-                            </div>
+                                        <img src="img/theme/images (8).jpg" class="rounded-circle">
+                                    
+                                </div>
                             </div>
                         </div>
+                        <br>
+                        <br>
+                        <div class="card-body pt-0 pt-md-4" style="background-image: url(img/theme/bharath-g-s-aLGiPJ4XRO4-unsplash.jpg; background-size: cover; background-position: center top;">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="card-profile-stats d-flex justify-content-center mt-md-5">
+                                        <div>
+                                            <span class="heading">Registration ID</span>
+                                            <span class="ni education_hat mr-2">{{this.usersObj.registrationNo}}</span>
+                                        </div>
+                                        <div>
+                                            <span class="heading">First Name</span>
+                                            <span class="ni education_hat mr-2">{{this.usersObj.first}}</span>
+                                        </div>
+                                        <div>
+                                            <span class="heading">Last Name</span>
+                                            <span class="ni education_hat mr-2">{{this.usersObj.last}}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                                <br>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="card-profile-stats d-flex justify-content-center mt-md-5">
+                                        <div>
+                                            <span class="heading">Email</span>
+                                            <span class="ni education_hat mr-2">{{this.usersObj.email}}</span>
+                                        </div>
+                                        <div>
+                                            <span class="heading">Phone Number</span>
+                                            <span class="ni education_hat mr-2">{{this.usersObj.phone}}</span>
+                                        </div>
+                                        <div>
+                                            <span class="heading">Registration Type</span>
+                                            <span class="ni education_hat mr-2">{{this.usersObj.type}}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                                <br>
+                                <div class="row">
+                                <div class="col">
+                                    <div class="card-profile-stats d-flex justify-content-center mt-md-5">
+                                        <div>
+                                            <span class="heading">No. of Tickets</span>
+                                            <span class="ni education_hat mr-2">{{this.usersObj.ticket}}</span>
+                                        </div>
+                                        <div>
+                                            <span class="heading">AadharNo.</span>
+                                            <span class="ni education_hat mr-2">{{this.usersObj.aadhar}}</span>
+                                        </div>
+                                        <div>
+                                            <span class="heading">Address</span>
+                                            <span class="ni education_hat mr-2">{{this.usersObj.address}}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                                <hr class="my-4" />
+        
+                        </div>
                     </div>
-
-                      <br>
-                      <br>
-                      <br>
-                       <br>
-                       <br>
-                       <br>
-                       <br>
-
-                      
-
- <div class="row justify-content-center"  style="margin-right:20px" >
-        <div class="col-lg-5 col-md-7">
-            <div class="card bg-secondary shadow border-0">
-                <div class="card-header bg-transparent pb-5" style="min-height:100px; background-image: url(img/theme/15.jpg); background-size: cover; background-position: center top;color:black" >
-                           
-                                           <div class="row">
-                                                <div class="column"  style="padding-left:20px">Name  </div>
-                                                 <div class="column"  style="padding-left:50px"></div>
-                                           </div>
-
-                                            <div class="row">
-                                                <div class="column"  style="padding-left:20px">Email  </div>
-                                                 <div class="column"  style="padding-left:45px"></div>
-                                           </div>
-
-                                           <div class="row">
-                                                <div class="column"  style="padding-left:20px">Phone no.   </div>
-                                                 <div class="column"  style="padding-left:30px"></div>
-                                           </div>
-
-                                            <div class="row">
-                                                <div class="column"  style="padding-left:20px">Aadhar No. </div>
-                                                 <div class="column"  style="padding-left:45px"></div>
-                                           </div>
-
-                                           <div class="row">
-                                                <div class="column"  style="padding-left:20px">City  </div>
-                                                 <div class="column"  style="padding-left:50px"></div>
-                                          </div>
-                             
-
-
-
                 </div>
             </div>
         </div>
-    </div>                      
-
- <br>
-<br>                                 
-                                
-                               
-                            </form>
-                        </template>
-                    </card>
-                    <br>
-                  
-                </div>
-            </div>
-        </div>
+        </base-header>
     </div>
+        
     
 </template>
 <script>
@@ -244,6 +191,7 @@ export default {
         return {
           user:{},
           usersObj:{},
+          eventObj:{},
           eventList:[],
           uid:''
         };
@@ -252,26 +200,29 @@ export default {
 
       
       this.uid = localStorage.getItem('uid') 
-             console.log(this.uid)
-      db.doc('users/'+this.uid).get().then(snap=>{
-        console.log(snap.data())
-        this.user=snap.data()
-        console.log(this.user)
-      }).then(()=>{
-         db.collection('AllEvents').onSnapshot(snapshot=>{
-          this.eventList = []
-          let event = {}
-          snapshot.forEach(doc=>{
-            console.log(doc.id) 
-            event = doc.data()
-            console.log(event)
-            event['id']=doc.id
-            if(this.user.registeredEvents.includes(event.id)){
-            this.eventList.push(event)
-            }
-          })
-          console.log(this.eventList)
-        })
+      let eventID=this.$route.params.eventID
+        console.log(this.uid)
+        console.log(eventID)
+        db.collection('AllUsers/'+this.uid+'/'+eventID).get().then(snapshot=>{
+            console.log(eventID)
+               snapshot.forEach(doc=>{
+                   console.log(doc.data())
+                   this.usersObj=doc.data()
+                   console.log(this.usersObj)
+               })
+        }).then(()=>{
+         db.collection('AllEvents').get().then(snapshot=>{
+             snapshot.forEach(doc=>{
+                 if(doc.id==eventID){
+                     console.log(doc.id)
+                     console.log(doc.data())
+                     this.eventObj=doc.data()
+                     console.log(this.eventObj);
+                     
+                 }
+                
+             })
+         })
       }) 
       
 
