@@ -5,22 +5,22 @@
               expand>
         <form class="navbar-search navbar-search-dark form-inline mr-3 d-none d-md-flex ml-lg-auto">
             <div class="form-group mb-0">
-                <base-input placeholder="Search"
+                <!-- <base-input placeholder="Search"
                             class="input-group-alternative"
                             alternative=""
                             addon-right-icon="fas fa-search">
-                </base-input>
+                </base-input> -->
             </div>
         </form>
         <ul class="navbar-nav align-items-center d-none d-md-flex">
             <li class="nav-item dropdown">
                 <base-dropdown class="nav-link pr-0">
                     <div class="media align-items-center" slot="title">
-                <span class="avatar avatar-sm rounded-circle">
-                  <img alt="Image placeholder" src="img/theme/team-4-800x800.jpg">
+                <span class="avatar rounded-circle">
+                  <img alt="Image placeholder" src="img/theme/89.png">
                 </span>
                         <div class="media-body ml-2 d-none d-lg-block">
-                            <span class="mb-0 text-sm  font-weight-bold">Jessica Jones</span>
+                            <h1 class="mb-0 text-sm  font-weight-bold">Ions Event Creations</h1>
                         </div>
                     </div>
 

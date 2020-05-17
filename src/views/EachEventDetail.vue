@@ -1,7 +1,7 @@
 <template>
     <div>
         <base-header class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center"
-                     style="min-height: 600px; background-image: url(img/theme/a.jpg); background-size: cover; background-position: center top;">
+                     style="min-height: 500px; background-image: url(img/theme/a.jpg); background-size: cover; background-position: center top;">
             <!-- Mask -->
             <!-- <span class="mask bg-gradient-success opacity-1"></span> -->
             <!-- Header container -->
@@ -17,12 +17,18 @@
                             </div>
                         </div>
                     </div>
+                    <br>
+                    <br>
+                    <br>
+                     <br>
+                    <br>
+                    <br>
             <div class="container-fluid d-flex align-items-center" >
                
             </div>
         </base-header>
 
-        <div class="container-fluid mt--7"  style="min-height: 600px; background-image: url(img/theme/a.jpg); background-size: cover; background-position: center top;">
+        <div class="container-fluid mt--7"  style="min-height: 200px; background-image: url(img/theme/a.jpg); background-size: cover; background-position: center top;">
             <div class="row">
         
 
@@ -33,125 +39,187 @@
                         <template >
                             
                             <form @submit.prevent  style="min-height: 600px; background-image: url(img/theme/1.jpg); background-size: cover; background-position: center top;">
-                                <h2 style="padding-left:21px;padding-top:20px">  Event Information</h2>
-                                
-                                <div v-for="event in eventList" v-bind:key="event.title">
-                                            <hr class="my-4" />
-                                 <div class="pl-lg-4">
-                                    <div class="row">
-                                        <div class="col-lg-12">
-                                          <div class="row">   
-                                           <h4 style="padding-left:15px">Title   :  </h4>
-                                            <h4  style="padding-left:10px">{{event.title}}</h4>
-                                           </div> 
-                                        </div>                                       
-                                    </div>
-                                   <div class="row"> 
-                                    <div class="col-lg-6">
-                                         <div class="row"> 
-                                             <h4 style="padding-left:15px">Event Date  :</h4>
-                                             <h4  style="padding-left:10px">{{event.timings.date}}</h4>
-                                          </div>
-                                    </div>                     
-                                    </div>
-                                     <div class="row"> 
-                                    <div class="col-lg-6">
-                                         <div class="row"> 
-                                             <h4 style="padding-left:15px">Event Description  :</h4>
-                                             <h4  style="padding-left:10px">{{event.description}}</h4>
-                                          </div>
-                                    </div>                     
-                                    </div>
-                                    <div class="row"> 
-                                    <div class="col-lg-6">
-                                         <div class="row"> 
-                                             <h4 style="padding-left:15px">Event Type :</h4>
-                                             <h4  style="padding-left:10px">{{event.type}}</h4>
-                                          
-                                          </div>
-                                    </div>                     
-                                    </div>
-                                    <div class="row"> 
-                                    <div class="col-lg-6">
-                                         <div class="row"> 
-                                             <h4 style="padding-left:15px">Event City  :</h4>
-                                             <h4  style="padding-left:10px">{{event.city}}</h4>
-                                          
-                                          </div>
-                                    </div>                     
-                                    </div>
-
-                                     <h2 style="padding-left:0px;padding-top:20px;align:center" >Contact Information</h2>
-                                 <hr class="my-4" />
-                                 <div class="pl-lg-4">
-                                   
-                                     <div class="row">
-                                        <div class="col-lg-12">
-                                          <div class="row">   
-                                           <h4 style="padding-left:0px">Email  :  </h4>
-                                            <h4  style="padding-left:10px">{{event.email}}</h4>
-                                           </div> 
-                                        </div>                                       
-                                    </div>
-                                   <div class="row"> 
-                                    <div class="col-lg-6">
-                                         <div class="row"> 
-                                             <h4 style="padding-left:0px">Phone Number :</h4>
-                                             <h4 style="padding-left:10px">{{event.phoneNo}}</h4>
-                                          </div>
-                                    </div>                     
-                                    </div>
-
-
-                                 </div>
-
-                                    
-                                     <br>
-                                     
-                                  </div>
-                                 </div>    
-                                
-                                
-
-                               
-                                <!-- Address -->
+                                <h2 style="padding-left:21px;padding-top:20px;padding-bottom:0px;r">  Event Information</h2>
                                  <div class="card card-profile shadow">
                         <div class="row justify-content-center">
                             <div class="col-lg-3 order-lg-2">
                                 <div class="card-profile-image" style="padding-bottom:0px">
                                     <a href="#">
-                                        <img src="img/theme/d.jpg" class="rounded-circle" >
-                                    </a>
-                               
-
-
-
+                                        <img src="img/theme/45.jpg" class="rounded-circle" >
+                                    </a>                     
                             </div>
                             </div>
                         </div>
-
-
                     </div>
-                    <div class="pl-lg-4">
-                                       <div class="row">
-                                        <div class="col-lg-12">
-                                          <div class="row">   
-                                           <h4 style="padding-left:15px;padding-top:50px">Name  :  </h4>
-                                            <h4  style="padding-left:10px;padding-top:50px">{{user.name}}</h4>
-                                           </div> 
-                                        </div>                                       
-                                    </div>
 
-                                    <div class="row">
-                                        <div class="col-lg-12">
-                                          <div class="row">   
-                                           <h4 style="padding-left:15px">Your address :  </h4>
-                                            <h4  style="padding-left:10px">{{usersObj.first}}</h4>
-                                           </div> 
-                                        </div>                                       
-                                    </div>
-                                 
-                    </div>                  
+  <br>
+                      <br>
+                      <br>
+                      <br>
+                      <br>
+                                
+                                <div v-for="event in eventList" v-bind:key="event.title">
+                                           
+                                            
+                                 <div class="pl-lg-4">     
+
+
+         <div class="row justify-content-center"  style="margin-right:20px;" >
+        <div class="col-lg-5 col-md-7">
+            <div class="card bg-secondary shadow border-0">
+                <div class="card-header bg-transparent pb-5"  style="min-height: 100px; background-image: url(img/theme/15.jpg); background-size: cover; background-position: center top;color:black">
+                           
+                                           <div class="row">
+                                                <div class="column"  style="padding-left:20px">Title   </div>
+                                                 <div class="column"  style="padding-left:50px">{{event.title}}</div>
+                                           </div>
+
+                                            <div class="row">
+                                                <div class="column"  style="padding-left:20px">Date   </div>
+                                                 <div class="column"  style="padding-left:45px">{{event.timings.date}}</div>
+                                           </div>
+
+                                           <div class="row">
+                                                <div class="column"  style="padding-left:20px">Details   </div>
+                                                 <div class="column"  style="padding-left:30px">{{event.description}}</div>
+                                           </div>
+
+                                            <div class="row">
+                                                <div class="column"  style="padding-left:20px">Type  </div>
+                                                 <div class="column"  style="padding-left:45px">{{event.type}}</div>
+                                           </div>
+
+                                           <div class="row">
+                                                <div class="column"  style="padding-left:20px">City  </div>
+                                                 <div class="column"  style="padding-left:50px">{{event.city}}</div>
+                                          </div>                           
+
+                </div>
+            </div>
+        </div>
+    </div>            
+
+    
+                                                        
+                               
+                                     <h2 style="padding-left:0px;padding-top:20px;align:center" >Contact Information</h2>
+                                       <div class="card card-profile shadow">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-3 order-lg-2">
+                                <div class="card-profile-image" style="padding-bottom:0px">
+                                    <a href="#">
+                                        <img src="img/theme/23.png" class="rounded-circle" >
+                                    </a>                     
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+
+  <br>
+                      <br>
+                      <br>
+                      <br>
+                      <br>
+
+                               
+                                 <div class="pl-lg-4">
+
+                                    
+         <div class="row justify-content-center" style="margin-bottom:70px;padding-bottom:0px;margin-right:50px;margin-left:0px" >
+        <div class="col-lg-5 col-md-7">
+            <div class="card bg-secondary shadow border-0" style="min-height: 50px; background-image: url(img/theme/15.jpg); background-size: cover; background-position: center top;color:black">
+               
+                                   
+                                         <div class="row">
+                                                <div class="column"  style="padding-left:20px;padding-bottom:10px">Email  </div>
+                                                 <div class="column"  style="padding-left:45px;padding-bottom:10px">{{event.email}}</div>
+                                           </div>
+
+                                           <div class="row">
+                                                <div class="column"  style="padding-left:20px">Phone No.  </div>
+                                                 <div class="column"  style="padding-left:10px">{{event.phoneNo}}</div>
+                                          </div>
+
+                                 </div>
+
+                                    
+                                    
+                                     
+                                  </div>
+                                 </div>                      
+
+                
+            </div>
+        </div>
+    </div>
+              
+                                
+     <h2 style="padding-left:21px;padding-top:20px;padding-bottom:0px;r">  User Details</h2>                            
+
+                               
+                                <!-- Address -->
+                       <div class="card card-profile shadow">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-3 order-lg-2">
+                                <div class="card-profile-image" style="padding-bottom:0px">
+                                    <a href="#">
+                                        <img src="img/theme/26.jpg" class="rounded-circle" >
+                                    </a>                     
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+
+                      <br>
+                      <br>
+                      <br>
+                       <br>
+                       <br>
+                       <br>
+                       <br>
+
+                      
+
+ <div class="row justify-content-center"  style="margin-right:20px" >
+        <div class="col-lg-5 col-md-7">
+            <div class="card bg-secondary shadow border-0">
+                <div class="card-header bg-transparent pb-5" style="min-height:100px; background-image: url(img/theme/15.jpg); background-size: cover; background-position: center top;color:black" >
+                           
+                                           <div class="row">
+                                                <div class="column"  style="padding-left:20px">Name  </div>
+                                                 <div class="column"  style="padding-left:50px"></div>
+                                           </div>
+
+                                            <div class="row">
+                                                <div class="column"  style="padding-left:20px">Email  </div>
+                                                 <div class="column"  style="padding-left:45px"></div>
+                                           </div>
+
+                                           <div class="row">
+                                                <div class="column"  style="padding-left:20px">Phone no.   </div>
+                                                 <div class="column"  style="padding-left:30px"></div>
+                                           </div>
+
+                                            <div class="row">
+                                                <div class="column"  style="padding-left:20px">Aadhar No. </div>
+                                                 <div class="column"  style="padding-left:45px"></div>
+                                           </div>
+
+                                           <div class="row">
+                                                <div class="column"  style="padding-left:20px">City  </div>
+                                                 <div class="column"  style="padding-left:50px"></div>
+                                          </div>
+                             
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>                      
+
+ <br>
+<br>                                 
                                 
                                
                             </form>
