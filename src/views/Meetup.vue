@@ -116,6 +116,7 @@
                                                         placeholder="First name"
                                                         input-classes="form-control-alternative"
                                                         v-model="userObj.first"
+                                                        v-validate="'required'"
                                             />
                                         </div>
                                         <div class="col-lg-6">
@@ -251,14 +252,21 @@
                                                         v-model="userObj.state"
                                             />
                                         </div>
-                                        <div class="col-lg-4">
+                                        <ValidationProvider  rules="required|Phone Number">
+                                        <div class="col-lg-18" slot-scope="{ errors }">
+                                            
                                             <base-input alternative=""
                                                         label="Phone Number"
                                                         placeholder="Phone Number"
                                                         input-classes="form-control-alternative"
                                                         v-model="userObj.phone"
                                             />
+                                            <span>{{ errors[0] }}</span>
+                                            
                                         </div>
+                                        </ValidationProvider>
+                                        
+                                        
                                     </div>
                                      
                                 </div>
@@ -326,12 +334,21 @@
     
 </template>
 <script>
+import { ValidationProvider } from 'vee-validate';
 import Loading from 'vue-loading-overlay';
     // Import stylesheet
 import 'vue-loading-overlay/dist/vue-loading.css';
 import firebase from '@/firebase_init.js';
 let db = firebase.firestore();
 const auth = firebase.auth();
+import { extend } from 'vee-validate';
+import { required } from 'vee-validate/dist/rules';
+ 
+// Add the required rule
+extend('required', {
+  ...required,
+  message: 'This field is required'
+});
 
   export default {
     name: 'user-profile',
@@ -339,7 +356,8 @@ const auth = firebase.auth();
        eventID:String
     },
     components: {
-            Loading
+            Loading,
+            ValidationProvider
         },
  
     data() {
