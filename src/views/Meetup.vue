@@ -353,7 +353,7 @@
     
 </template>
 <script>
-
+import emailjs from 'emailjs-com';
 import Loading from 'vue-loading-overlay';
     // Import stylesheet
 import 'vue-loading-overlay/dist/vue-loading.css';
@@ -417,6 +417,7 @@ const auth = firebase.auth();
              }
         },
         register(){
+            this.user = JSON.parse(localStorage.getItem('user'))
             this.isLoading = true;
             let eventID = this.$route.params.eventID
             let today = new Date();
@@ -460,10 +461,24 @@ const auth = firebase.auth();
                             title: 'Registered'
                             }) 
                    }).then(s=>{
+                       console.log(this.user.email)
+                       var templateParams = {
+                            regID: regID,
+                            title: this.eventObj.title,
+                            email: this.user.email
+                        };
+                        console.log("sdkljd")
+                        console.log(templateParams)
                        this.isLoading = false
-            localStorage.setItem('user',JSON.stringify(this.user))
+                       localStorage.setItem('user',JSON.stringify(this.user))
+                       emailjs.send('gmail', 'registration_id',templateParams, 'user_G6anhzngYBJOuFmhiVGNs')
+                        .then((result) => {
+                            console.log('SUCCESS!', result.status, result.text);
+                        }, (error) => {
+                            console.log('FAILED...', error);
+                        })
            
-          }).then(()=>{
+                  }).then(()=>{
                        this.$router.push('/User_Registrations')
                    })
                })

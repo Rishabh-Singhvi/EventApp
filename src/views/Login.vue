@@ -36,6 +36,7 @@
                             </base-checkbox>
                             <br>
                                   <div class="col-md-7">
+                                      
                         <base-button type="primary" class=" mb-10" @click="loginEmail">
                             Login
                         </base-button>
@@ -60,6 +61,10 @@
                         </modal>
                        
                        </div>
+                             <loading :active.sync="isLoading" 
+                                    :can-cancel="true" 
+                                    :on-cancel="onCancel"
+                                    :is-full-page="fullPage"></loading>
                             <base-alert type="warning" v-if="error">
                                 <strong>{{error}}</strong>
                             </base-alert>
@@ -79,6 +84,7 @@
         </div>
 </template>
 <script>
+import Loading from 'vue-loading-overlay';
 import firebase from '@/firebase_init.js';
 let db = firebase.firestore();
 const auth = firebase.auth();
@@ -86,7 +92,7 @@ const auth = firebase.auth();
         name: 'login',
         data() {
             return {
-                
+                isLoading: false,
                 email: '',
                 password: '',
                 error:'',
@@ -94,6 +100,10 @@ const auth = firebase.auth();
                 modal2:false
                 },
             }        
+        },
+        components: {
+            Loading,
+            
         },
         methods:{
             setType(type){
@@ -129,6 +139,7 @@ const auth = firebase.auth();
             },
             loginEmail(){
                 if(this.password!=''&&this.email!=''){
+                    this.isLoading = true;
                 auth.signInWithEmailAndPassword(this.email,this.password).then(snap=>{
                     let user = snap.user
                     console.log(user)
@@ -149,9 +160,11 @@ const auth = firebase.auth();
                         }
                 })
                 }).then(()=>{
+                    this.isLoading=false
                     this.$router.push('dashboard')
                 })
                 .catch(err=>{
+                    this.isLoading=false
                     this.error = err.message
                     console.log(err)
                 })

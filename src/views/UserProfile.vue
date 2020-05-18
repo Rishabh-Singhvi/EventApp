@@ -24,9 +24,10 @@
                         <div class="row justify-content-center">
                             <div class="col-lg-3 order-lg-2">
                                 <div class="card-profile-image">
-                                    <a href="#">
-                                        <img src="img/theme/team-4-800x800.jpg" class="rounded-circle">
-                                    </a>
+                                    <input type="file" @change="previewImage" accept="image/*" >
+                                      <base-button size="sm" type="info" class="mr-4" @click="onUpload">Upload</base-button>
+                                        <img :src="picture" class="rounded-circle">
+                                   
                                 </div>
                             </div>
                         </div>
@@ -190,11 +191,13 @@
     </div>
 </template>
 <script>
+import firebase from '@/firebase_init.js';
   export default {
     name: 'user-profile',
     data() {
       return {
         model: {
+          picture:null,
           username: '',
           email: '',
           firstName: '',
@@ -207,6 +210,27 @@
         }
       }
     },
+    methods:{
+    previewImage(event) {
+     // this.uploadValue=0;
+      this.picture=null;
+      //this.imageData = event.target.files[0];
+    },
+        onUpload(){
+      this.picture=null;
+      const storageRef=firebase.storage().ref(`${this.imageData.name}`).put(this.imageData);
+      storageRef.on(`state_changed`,snapshot=>{
+        this.uploadValue = (snapshot.bytesTransferred/snapshot.totalBytes)*100;
+      }, error=>{console.log(error.message)},
+      ()=>{this.uploadValue=100;
+        storageRef.snapshot.ref.getDownloadURL().then((url)=>{
+          this.picture =url;
+        });
+      }
+      );
+    }
+
+    }
   };
 </script>
 <style></style>
