@@ -521,7 +521,7 @@ const auth = firebase.auth();
                  this.userObj=snap.data()
                  }
                  else{
-                     userObj={
+                     this.userObj={
             'username':'',
             'first':'',
             'last':'',
