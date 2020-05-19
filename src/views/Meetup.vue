@@ -289,8 +289,9 @@
                             Submit
                         </base-button>
 
-                        <modal :show.sync="modals.modal2"
-                            gradient="danger"
+                    
+                            <modal :show.sync="modals.modal2"
+                            gradient="warning"
                             modal-classes="modal-danger modal-dialog-centered">
                             <h6 slot="header" class="modal-title heading mt-1" id="modal-title-notification">Preview</h6>
                             <div class="py-3 text-center">
@@ -417,6 +418,7 @@ const auth = firebase.auth();
         });
       }
       )
+
         },
         setType(type){
             this.userObj.type=type

@@ -20,11 +20,11 @@ import App from './App.vue'
 import router from './router'
 import './registerServiceWorker'
 import ArgonDashboard from './plugins/argon-dashboard'
-import { ValidationProvider } from 'vee-validate';
+// import { ValidationProvider } from 'vee-validate';
  
 // Register it globally
 // main.js or any entry file.
-Vue.component('ValidationProvider', ValidationProvider);
+// Vue.component('ValidationProvider', ValidationProvider);
 
 Vue.config.productionTip = false
 
