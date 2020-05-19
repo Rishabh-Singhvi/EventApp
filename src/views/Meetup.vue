@@ -516,9 +516,28 @@ const auth = firebase.auth();
              })
          }).then(()=>{
              db.doc('newUser/'+this.uid).get().then(snap=>{
-
+                 if(snap.data()){
                  console.log(snap.data())
                  this.userObj=snap.data()
+                 }
+                 else{
+                     userObj={
+            'username':'',
+            'first':'',
+            'last':'',
+            'email':'',
+            'type':'',
+            'ticket':'',
+            'city':'',
+            'state':'',
+            'phone':'',
+            'address':'',
+            'postalCode':'',
+            'abt':'',
+            'aadhar':'',
+            'registrationNo':''
+            }
+                 }
 
              })
          })
