@@ -1,5 +1,6 @@
 <template>
         <div class="row justify-content-center">
+            
             <div class="col-lg-5 col-md-7">
                 <div class="card bg-secondary shadow border-0">
                     <div class="card-header bg-transparent pb-5">
@@ -40,7 +41,13 @@
                         <base-button type="primary" class=" mb-10" @click="loginEmail">
                             Login
                         </base-button>
-
+                        <div class="vld-parent">
+                         <loading :active.sync="isLoading" 
+                                    :can-cancel="true" 
+                                    :on-cancel="onCancel"
+                                    :is-full-page="fullPage"></loading>
+                        </div>
+                        
                         <modal :show.sync="modals.modal2"
                             gradient="danger"
                             modal-classes="modal-danger modal-dialog-centered">
@@ -61,10 +68,6 @@
                         </modal>
                        
                        </div>
-                             <loading :active.sync="isLoading" 
-                                    :can-cancel="true" 
-                                    :on-cancel="onCancel"
-                                    :is-full-page="fullPage"></loading>
                             <base-alert type="warning" v-if="error">
                                 <strong>{{error}}</strong>
                             </base-alert>
@@ -93,6 +96,7 @@ const auth = firebase.auth();
         data() {
             return {
                 isLoading: false,
+                fullPage: true,
                 email: '',
                 password: '',
                 error:'',
