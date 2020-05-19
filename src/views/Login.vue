@@ -17,6 +17,7 @@
                             <small>Or sign in with credentials</small>
                         </div>
                         <form role="form">
+                          
                             <base-input class="input-group-alternative mb-3"
                                         placeholder="Email"
                                         addon-left-icon="ni ni-email-83"
@@ -33,9 +34,32 @@
                             <base-checkbox class="custom-control-alternative">
                                 <span class="text-muted">Remember me</span>
                             </base-checkbox>
-                            <div class="text-center">
-                                <base-button @click="loginEmail" type="primary" class="my-4">Sign in</base-button>
+                            <br>
+                                  <div class="col-md-7">
+                        <base-button type="primary" class=" mb-10" @click="loginEmail">
+                            Login
+                        </base-button>
+
+                        <modal :show.sync="modals.modal2"
+                            gradient="danger"
+                            modal-classes="modal-danger modal-dialog-centered">
+                            <h6 slot="header" class="modal-title heading mt-1" id="modal-title-notification">Alert</h6>
+                            <div class="py-3 text-center">
+                                <i class="ni ni-circle-08 ni-3x"></i>
+                                
+                                <p>All Fields Are Mandatory</p>
                             </div>
+                            <template slot="footer">
+                                <base-button type="link"
+                                            text-color="white"
+                                            class="ml-auto"
+                                            @click="modals.modal2 = false">
+                                    Close
+                                </base-button>
+                            </template>
+                        </modal>
+                       
+                       </div>
                             <base-alert type="warning" v-if="error">
                                 <strong>{{error}}</strong>
                             </base-alert>
@@ -62,12 +86,20 @@ const auth = firebase.auth();
         name: 'login',
         data() {
             return {
+                
                 email: '',
                 password: '',
-                error:''
+                error:'',
+                modals:{
+                modal2:false
+                },
             }        
         },
         methods:{
+            setType(type){
+            this.type=type
+            console.log(this.type)
+            },
             loginGoogle(){
                 var provider = new firebase.auth.GoogleAuthProvider();
                 auth.signInWithPopup(provider)
@@ -96,15 +128,37 @@ const auth = firebase.auth();
                 })
             },
             loginEmail(){
-                auth.signInWithEmailAndPassword(this.email,this.password).then(user=>{
-                    localStorage.setItem('uid',user.id)
-                    localStorage.setItem('user',JSON.stringify(user))
+                if(this.password!=''&&this.email!=''){
+                auth.signInWithEmailAndPassword(this.email,this.password).then(snap=>{
+                    let user = snap.user
+                    console.log(user)
+                    return db.doc("users/"+user.uid).get()
+                    .then(doc => {
+                        if(!doc.exists){
+                            return db.doc("users/"+ user.uid).set({
+                                name : user.displayName,
+                                email: user.email,
+                                registeredEvents:[],
+                                photoURL:user.photoURL
+                            })
+                        }
+                        else {
+                            console.log(doc.data())
+                            localStorage.setItem('uid',doc.id)
+                            localStorage.setItem('user',JSON.stringify(doc.data()))
+                        }
+                })
+                }).then(()=>{
                     this.$router.push('dashboard')
                 })
                 .catch(err=>{
                     this.error = err.message
                     console.log(err)
                 })
+                }
+                else{
+                    this.modals.modal2=true
+                }
             }
         }
   }

@@ -80,7 +80,13 @@ export default new Router({
           name: 'Participants Data',
           component: () => import(/* webpackChunkName: "demo" */ './views/participant.vue')
 
+        },
+        {
+          path: '/First',
+          name: 'Page 2',
+          component: () => import(/* webpackChunkName: "demo" */ './views/First.vue')
         }
+
 
 
 

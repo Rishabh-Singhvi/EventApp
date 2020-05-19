@@ -175,11 +175,70 @@
                         </template>
                     </card>
                     <br>
-                      <loading :active.sync="isLoading" 
+                        <div class="col-md-3">
+                        <base-button block type="warning" class=" mb-3" @click="mode">
+                            Create
+                        </base-button>
+
+                        <modal :show.sync="modals.modal2"
+                            gradient="danger"
+                            modal-classes="modal-danger modal-dialog-centered">
+                            <h6 slot="header" class="modal-title heading mt-1" id="modal-title-notification">Preview</h6>
+                            <div class="py-3 text-center">
+                                <i class="ni ni-circle-08 ni-3x"></i>
+                                <h4 class="heading mt-4">Your Details</h4>
+                                <p>Are you sure you want to create the event</p>
+                            </div>
+                            <span class="mb-4">Title :</span><span>{{eventObj.title}} </span>
+                            <br>
+                            <span>Description :</span><span>{{eventObj.description}} </span>
+                            <br>
+                            <span>Date. :</span><span>{{eventObj.timings.date}}</span>
+                            <br>
+                            <span>Start Time :</span><span>{{eventObj.timings.start}}</span>
+                            <br>
+                            <span>End Time :</span><span>{{eventObj.timings.end}}</span>
+                            <br>
+                            <span>Event Type :</span><span>{{eventObj.type}}</span>
+                            <br>
+                            <span>Venue :</span><span>{{eventObj.address}},{{eventObj.city}},{{eventObj.state}},{{eventObj.postalCode}}</span>
+                            <br>
+                            <span>Email :</span><span>{{eventObj.email}}</span>
+                            <br>
+                            <span>Phone No. :</span><span>{{eventObj.phoneNo}}</span>
+                            
+
+                            <template slot="footer">
+                                <loading :active.sync="isLoading" 
                                     :can-cancel="true" 
                                     :on-cancel="onCancel"
                                     :is-full-page="fullPage"></loading>
-                    <base-button type="success" @click="create">Create</base-button>
+                                <base-button type="white" @click="create">Create</base-button>
+                                <base-button type="link"
+                                            text-color="white"
+                                            class="ml-auto"
+                                            @click="modals.modal2 = false">
+                                    Close
+                                </base-button>
+                            </template>
+                        </modal>
+                        <modal :show.sync="modals.modal1"
+                            gradient="danger"
+                            modal-classes="modal-danger modal-dialog-centered">
+                            <h6 slot="header" class="modal-title heading mt-1" id="modal-title-notification">Preview</h6>
+                            <div class="py-3 text-center">
+                                <i class="ni ni-circle-08 ni-3x"></i>
+                                <h4 class="heading mt-4"></h4>
+                                <p>All fields are mandatory</p>
+                            </div>
+                            
+
+                            <template slot="footer">
+                                <base-button type="white" @click="modals.modal1 = false">Close</base-button>
+                            </template>
+                        </modal>
+                   </div>
+                      
                 </div>
             </div>
         </div>
@@ -222,6 +281,10 @@ const auth = firebase.auth();
                 'end':''
             },
         },
+         modals:{
+           modal2:false,
+           modal1:false
+        },
         waterMark : 'Select a time',
         dates: {
             simple: "2018-07-17"
@@ -232,6 +295,14 @@ const auth = firebase.auth();
         setType(type){
             this.eventObj.type=type
             console.log(this.eventObj.type)
+        },
+        mode(){
+             if(this.eventObj.title!=''&&this.eventObj.description!=''&&this.eventObj.type!=''&&this.eventObj.timings.date!=''&&this.eventObj.email!=''&&this.eventObj.phoneNO!=''&&this.eventObj.timings.start!=''&&this.eventObj.address!=''&&this.eventObj.state!=''&&this.eventObj.city!=''&&this.eventObj.postalCode!=''&&this.eventObj.timings.end!=''){
+                 this.modals.modal2=true
+             }
+             else{
+                 this.modals.modal1=true
+             }
         },
         create(){
             this.isLoading = true;
@@ -245,6 +316,8 @@ const auth = firebase.auth();
                 title: 'Event Created'
             })
             
+        }).then(()=>{
+            this.$router.push('/ListofUsers')
         })
         
       }
