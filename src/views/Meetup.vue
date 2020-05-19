@@ -224,12 +224,15 @@
                                             
                                         </div>
                                          <div class="col-lg-6">
-                                            <base-input alternative=""
-                                                        label="Aadhar Card Number"
-                                                        placeholder="Aadhar Number"
-                                                        input-classes="form-control-alternative"
-                                                        v-model="userObj.aadhar"
-                                            />
+                                             <h4 v-if="picture" class="text-success">Uploaded!</h4>
+                                             <h4 v-else>Upload any goverment ID</h4>
+                                             <div style="display:inline-block">
+                                            <input type="file" @change="previewImage" accept="image/*" >
+                                    <!-- <p>Progress: {{uploadValue.toFixed()+"%"}}
+      <progress id="progress" :value="uploadValue" max="100" ></progress>  </p> -->
+                                         
+                                           <base-button size="sm" type="info" class="mr-4" @click="onUpload">Upload</base-button>
+                                             </div>
                                             
                                         </div>
                                        
@@ -307,7 +310,7 @@
                             <br>
                             <span>Tickets Quantity :</span><span>{{userObj.ticket}}</span>
                             <br>
-                            <span>Aadhar No. :</span><span>{{userObj.aadhar}}</span>
+                            <span>Goverment ID :</span><span>{{userObj.aadhar}}</span>
                             <br>
                             <span>Address :</span><span>{{userObj.address}},{{userObj.city}},{{userObj.state}}</span>
                             
@@ -354,7 +357,7 @@
     
 </template>
 <script>
-
+import emailjs from 'emailjs-com';
 import Loading from 'vue-loading-overlay';
     // Import stylesheet
 import 'vue-loading-overlay/dist/vue-loading.css';
@@ -379,39 +382,43 @@ const auth = firebase.auth();
     data() {
       return {
           isLoading: false,
-          userObj:{
-            'first':'',
-            'last':'',
-            'email':'',
-            'type':'',
-            'ticket':'',
-            'city':'',
-            'state':'',
-            'phone':'',
-            'aadhar':'',
-            'address':'',
-            'registrationNo':''
-            },
+          userObj:{},
           eventObj:{},
         modals:{
            modal2:false,
            modal1:false
         },
           user:{},
-          uid:''
+          uid:'',
+          imageData: null,
+            uploadValue: 0,
+          picture:null,
 
       }
     },
     methods:{
-        Correct(){
-            if(this.userObj.first)
-            {
-                this.modals.modal2=true;
-            }
-            else
-            {
-                this.modals.modal1=true;
-            }
+         previewImage(event) {
+     // this.uploadValue=0;
+     this.uploadValue=0;
+      this.picture=null;
+      this.imageData = event.target.files[0];
+    },
+        onUpload(){
+      this.uid=localStorage.getItem('uid')
+      this.picture=null;
+      let storageRef=firebase.storage().ref(`${this.imageData.name}`).put(this.imageData);
+      storageRef.on(`state_changed`,snapshot=>{
+        this.uploadValue = (snapshot.bytesTransferred/snapshot.totalBytes)*100;
+      }, error=>{console.log(error.message)},
+      ()=>{this.uploadValue=100;
+        storageRef.snapshot.ref.getDownloadURL().then((url)=>{
+          this.picture =url;
+           console.log(this.picture)
+           this.userObj.aadhar=this.picture
+        });
+      }
+      )
+
         },
         setType(type){
             this.userObj.type=type
@@ -428,6 +435,7 @@ const auth = firebase.auth();
              }
         },
         register(){
+            this.user = JSON.parse(localStorage.getItem('user'))
             this.isLoading = true;
             let eventID = this.$route.params.eventID
             let today = new Date();
@@ -471,10 +479,24 @@ const auth = firebase.auth();
                             title: 'Registered'
                             }) 
                    }).then(s=>{
+                       console.log(this.user.email)
+                       var templateParams = {
+                            regID: regID,
+                            title: this.eventObj.title,
+                            email: this.user.email
+                        };
+                        console.log("sdkljd")
+                        console.log(templateParams)
                        this.isLoading = false
-            localStorage.setItem('user',JSON.stringify(this.user))
+                       localStorage.setItem('user',JSON.stringify(this.user))
+                       emailjs.send('gmail', 'registration_id',templateParams, 'user_G6anhzngYBJOuFmhiVGNs')
+                        .then((result) => {
+                            console.log('SUCCESS!', result.status, result.text);
+                        }, (error) => {
+                            console.log('FAILED...', error);
+                        })
            
-          }).then(()=>{
+                  }).then(()=>{
                        this.$router.push('/User_Registrations')
                    })
                })
@@ -484,23 +506,20 @@ const auth = firebase.auth();
     },
     beforeMount(){
         this.user = JSON.parse(localStorage.getItem('user'))
-        console.log("sdjh");
-        
-        console.log(this.user)
-        console.log("adjk");
-        
         this.uid = localStorage.getItem('uid')
         let eventID = this.$route.params.eventID
          db.collection('AllEvents').get().then(snapshot=>{
              snapshot.forEach(doc=>{
                  if(doc.id==eventID){
-                     console.log(doc.id)
-                     console.log(doc.data())
                      this.eventObj=doc.data()
-                     console.log(this.eventObj);
-                     
                  }
-                
+             })
+         }).then(()=>{
+             db.doc('newUser/'+this.uid).get().then(snap=>{
+
+                 console.log(snap.data())
+                 this.userObj=snap.data()
+
              })
          })
     }

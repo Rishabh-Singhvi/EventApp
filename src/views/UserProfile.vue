@@ -8,9 +8,8 @@
             <div class="container-fluid d-flex align-items-center">
                 <div class="row">
                     <div class="col-lg-7 col-md-10">
-                        <h1 class="display-2 text-white">Hello Jesse</h1>
+                        <h1 class="display-2 text-white">Hello!</h1>
                         <p class="text-white mt-0 mb-5">This is your profile page. You can see the progress you've made with your work and manage your projects or assigned tasks</p>
-                        <a href="#!" class="btn btn-info">Edit profile</a>
                     </div>
                 </div>
             </div>
@@ -20,72 +19,36 @@
             <div class="row">
                 <div class="col-xl-4 order-xl-2 mb-5 mb-xl-0">
 
+                    
+                </div>
+
+                <div class="col-xl-12 order-xl-1">
+                    <card shadow type="secondary">
+                        <div slot="header" class="bg-white border-0">
+                            <div class="row align-items-center">
+                                <div class="col-lg-3 order-lg-2">
+                                <h2 class="text-primary">Upload your profile photo</h2>
+                            </div>
+                               
                     <div class="card card-profile shadow">
                         <div class="row justify-content-center">
                             <div class="col-lg-3 order-lg-2">
                                 <div class="card-profile-image">
-                                    <a href="#">
-                                        <img src="img/theme/team-4-800x800.jpg" class="rounded-circle">
-                                    </a>
+                                        <img v-if="picture" style="width:200px;height:200px" :src="picture" class="rounded-circle">
+                                        <img v-else src="img/theme/72.png" class="rounded-circle">
+                                   
                                 </div>
                             </div>
                         </div>
                         <div class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
                             <div class="d-flex justify-content-between">
-                                <base-button size="sm" type="info" class="mr-4">Connect</base-button>
-                                <base-button size="sm" type="default" class="float-right">Message</base-button>
-                            </div>
-                        </div>
-                        <div class="card-body pt-0 pt-md-4">
-                            <div class="row">
-                                <div class="col">
-                                    <div class="card-profile-stats d-flex justify-content-center mt-md-5">
-                                        <div>
-                                            <span class="heading">22</span>
-                                            <span class="description">Friends</span>
-                                        </div>
-                                        <div>
-                                            <span class="heading">10</span>
-                                            <span class="description">Photos</span>
-                                        </div>
-                                        <div>
-                                            <span class="heading">89</span>
-                                            <span class="description">Comments</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="text-center">
-                                <h3>
-                                    Jessica Jones<span class="font-weight-light">, 27</span>
-                                </h3>
-                                <div class="h5 font-weight-300">
-                                    <i class="ni location_pin mr-2"></i>Bucharest, Romania
-                                </div>
-                                <div class="h5 mt-4">
-                                    <i class="ni business_briefcase-24 mr-2"></i>Solution Manager - Creative Tim Officer
-                                </div>
-                                <div>
-                                    <i class="ni education_hat mr-2"></i>University of Computer Science
-                                </div>
-                                <hr class="my-4" />
-                                <p>Ryan — the name taken by Melbourne-raised, Brooklyn-based Nick Murphy — writes, performs and records all of his own music.</p>
-                                <a href="#">Show more</a>
+                               <input type="file" @change="previewImage" accept="image/*" >
+                                    <!-- <p>Progress: {{uploadValue.toFixed()+"%"}}
+      <progress id="progress" :value="uploadValue" max="100" ></progress>  </p> -->
+                                      <base-button size="sm" type="info" class="mr-4" @click="onUpload">Upload</base-button>
                             </div>
                         </div>
                     </div>
-                </div>
-
-                <div class="col-xl-8 order-xl-1">
-                    <card shadow type="secondary">
-                        <div slot="header" class="bg-white border-0">
-                            <div class="row align-items-center">
-                                <div class="col-8">
-                                    <h3 class="mb-0">My account</h3>
-                                </div>
-                                <div class="col-4 text-right">
-                                    <a href="#!" class="btn btn-sm btn-primary">Settings</a>
-                                </div>
                             </div>
                         </div>
                         <template>
@@ -98,7 +61,7 @@
                                                         label="Username"
                                                         placeholder="Username"
                                                         input-classes="form-control-alternative"
-                                                        v-model="model.username"
+                                                        v-model="userObj.username"
                                             />
                                         </div>
                                         <div class="col-lg-6">
@@ -106,7 +69,7 @@
                                                         label="Email address"
                                                         placeholder="jesse@example.com"
                                                         input-classes="form-control-alternative"
-                                                        v-model="model.email"
+                                                        v-model="userObj.email"
                                             />
                                         </div>
                                     </div>
@@ -116,7 +79,7 @@
                                                         label="First name"
                                                         placeholder="First name"
                                                         input-classes="form-control-alternative"
-                                                        v-model="model.firstName"
+                                                        v-model="userObj.first"
                                             />
                                         </div>
                                         <div class="col-lg-6">
@@ -124,7 +87,7 @@
                                                         label="Last name"
                                                         placeholder="Last name"
                                                         input-classes="form-control-alternative"
-                                                        v-model="model.lastName"
+                                                        v-model="userObj.last"
                                             />
                                         </div>
                                     </div>
@@ -139,7 +102,7 @@
                                                         label="Address"
                                                         placeholder="Home Address"
                                                         input-classes="form-control-alternative"
-                                                        v-model="model.address"
+                                                        v-model="userObj.address"
                                             />
                                         </div>
                                     </div>
@@ -149,7 +112,7 @@
                                                         label="City"
                                                         placeholder="City"
                                                         input-classes="form-control-alternative"
-                                                        v-model="model.city"
+                                                        v-model="userObj.city"
                                             />
                                         </div>
                                         <div class="col-lg-4">
@@ -157,7 +120,7 @@
                                                         label="Country"
                                                         placeholder="Country"
                                                         input-classes="form-control-alternative"
-                                                        v-model="model.country"
+                                                        v-model="userObj.state"
                                             />
                                         </div>
                                         <div class="col-lg-4">
@@ -165,7 +128,7 @@
                                                         label="Postal code"
                                                         placeholder="Postal code"
                                                         input-classes="form-control-alternative"
-                                                        v-model="model.zipCode"
+                                                        v-model="userObj.postalCode"
                                             />
                                         </div>
                                     </div>
@@ -181,6 +144,7 @@
                                         </base-input>
                                     </div>
                                 </div>
+                                <base-button type="white" @click="register">Register</base-button>
                             </form>
                         </template>
                     </card>
@@ -190,11 +154,37 @@
     </div>
 </template>
 <script>
+import firebase from '@/firebase_init.js';
+let db = firebase.firestore();
+const auth = firebase.auth();
   export default {
     name: 'user-profile',
     data() {
       return {
+          userObj:{
+            'username':'',
+            'first':'',
+            'last':'',
+            'email':'',
+            'type':'',
+            'ticket':'',
+            'city':'',
+            'state':'',
+            'phone':'',
+            'address':'',
+            'postalCode':'',
+            'abt':'',
+            'aadhar':'',
+            'registrationNo':''
+            },
+           imageData: null,
+            uploadValue: 0,
+          picture:null,
+          uid:'',
         model: {
+        //     imageData: null,
+        //     uploadValue: 0,
+        //   picture:null,
           username: '',
           email: '',
           firstName: '',
@@ -207,6 +197,52 @@
         }
       }
     },
+    methods:{
+    previewImage(event) {
+     // this.uploadValue=0;
+     this.uploadValue=0;
+      this.picture=null;
+      this.imageData = event.target.files[0];
+    },
+        onUpload(){
+      this.uid=localStorage.getItem('uid')
+      this.picture=null;
+      let storageRef=firebase.storage().ref(`${this.imageData.name}`).put(this.imageData);
+      storageRef.on(`state_changed`,snapshot=>{
+        this.uploadValue = (snapshot.bytesTransferred/snapshot.totalBytes)*100;
+      }, error=>{console.log(error.message)},
+      ()=>{this.uploadValue=100;
+        storageRef.snapshot.ref.getDownloadURL().then((url)=>{
+          this.picture =url;
+           console.log(this.picture)
+          db.doc('users/'+this.uid).update({
+                 'photoURL':this.picture
+          })
+        });
+      }
+      )
+           
+     
+    },
+    register(){
+        this.uid=localStorage.getItem('uid')
+        db.doc('newUser/'+this.uid).set(this.userObj)
+    }
+
+    },
+    beforeMount(){
+        this.uid=localStorage.getItem('uid')
+         db.doc('users/'+this.uid).get().then(user=>{
+                 this.picture=user.data().photoURL
+          }).then(()=>{
+              db.doc('newUser/'+this.uid).get().then(snap=>{
+                  if(snap.data()){
+                      this.userObj=snap.data()
+                  }
+              })
+          })
+    }
+
   };
 </script>
 <style></style>
