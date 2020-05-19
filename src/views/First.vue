@@ -126,7 +126,7 @@
         <li class="list-inline-item"><a href="#" class="btn  btn-rounded" style="background-color:#5E321F;color:white">Get Started</a></li>
       </ul>
     </div>
-
+    <h1>{{this.uid}}</h1>
 
    
     <div class="text-center">
@@ -164,6 +164,15 @@
     },
     directives: {
       animateOnScroll
+    },
+     data() {
+      return {        
+          uid:'',     
+      }
+     },
+       beforeMount(){
+       
+        this.uid = localStorage.getItem('uid')
     }
   }
 </script>
