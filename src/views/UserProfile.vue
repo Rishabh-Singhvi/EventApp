@@ -17,11 +17,6 @@
 
         <div class="container-fluid mt--7">
             <div class="row">
-                <div class="col-xl-4 order-xl-2 mb-5 mb-xl-0">
-
-                    
-                </div>
-
                 <div class="col-xl-12 order-xl-1">
                     <card shadow type="secondary">
                         <div slot="header" class="bg-white border-0">
@@ -33,10 +28,10 @@
                     <div class="card card-profile shadow">
                         <div class="row justify-content-center">
                             <div class="col-lg-3 order-lg-2">
-                                <div class="card-profile-image">
-                                        <img v-if="picture" style="width:200px;height:200px" :src="picture" class="rounded-circle">
-                                        <img v-else src="img/theme/72.png" class="rounded-circle">
-                                   
+                                <div  class="card-profile-image" >
+                                        <img v-if="picture" style="width:190px;height:190px" :src="picture" class="rounded-circle">
+                                        <img v-else src="img/theme/72.png" style="width:190px;height:190px"  class="rounded-circle">
+                                         
                                 </div>
                             </div>
                         </div>
@@ -45,9 +40,12 @@
                                <input type="file" @change="previewImage" accept="image/*" >
                                     <!-- <p>Progress: {{uploadValue.toFixed()+"%"}}
       <progress id="progress" :value="uploadValue" max="100" ></progress>  </p> -->
-                                      <base-button size="sm" type="info" class="mr-4" @click="onUpload">Upload</base-button>
+                                      <base-button size="sm" v-if="!uploading" type="info" class="mr-4" @click="onUpload">Upload</base-button>
+                                      <base-button size="sm" v-if="uploading" disabled type="info" class="mr-4">Uploading</base-button>
+                                      
                             </div>
                         </div>
+                
                     </div>
                             </div>
                         </div>
@@ -148,19 +146,26 @@
                             </form>
                         </template>
                     </card>
+
                 </div>
             </div>
         </div>
     </div>
 </template>
 <script>
+
 import firebase from '@/firebase_init.js';
 let db = firebase.firestore();
 const auth = firebase.auth();
   export default {
     name: 'user-profile',
+    // components: {
+    //         Loading,
+            
+    //     },
     data() {
       return {
+          uploading:false,
           userObj:{
             'username':'',
             'first':'',
@@ -205,6 +210,7 @@ const auth = firebase.auth();
       this.imageData = event.target.files[0];
     },
         onUpload(){
+      this.uploading=true
       this.uid=localStorage.getItem('uid')
       this.picture=null;
       let storageRef=firebase.storage().ref(`${this.imageData.name}`).put(this.imageData);
@@ -214,10 +220,10 @@ const auth = firebase.auth();
       ()=>{this.uploadValue=100;
         storageRef.snapshot.ref.getDownloadURL().then((url)=>{
           this.picture =url;
-           console.log(this.picture)
           db.doc('users/'+this.uid).update({
                  'photoURL':this.picture
           })
+          this.uploading=false
         });
       }
       )
@@ -226,7 +232,9 @@ const auth = firebase.auth();
     },
     register(){
         this.uid=localStorage.getItem('uid')
-        db.doc('newUser/'+this.uid).set(this.userObj)
+        db.doc('newUser/'+this.uid).set(this.userObj).then(()=>{
+            this.$router.push('/dashboard')
+        })
     }
 
     },

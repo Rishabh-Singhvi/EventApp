@@ -23,7 +23,7 @@
                         <div class="row justify-content-center">
                             <div class="col-lg-3 order-lg-2">
                                 <div class="card-profile-image">
-                                        <img v-if="picture" style="width:200px;height:200px" :src="picture" class="rounded-circle">
+                                        <img v-if="picture" style="width:150px;height:150px" :src="picture" class="rounded-circle">
                                         <img v-else src="img/theme/images (8).jpg" class="rounded-circle">
                                     
                                 </div>
@@ -79,7 +79,7 @@
                                         </div>
                                         <div>
                                             <span class="heading">Goverment ID</span>
-                                            <img style="width:200px;height:200px" :src="this.usersObj.aadhar" class="rounded-circle">
+                                            <img style="width:180px;height:180px" :src="this.usersObj.aadhar">
                                         </div>
                                         <div>
                                             <span class="heading">Address</span>

@@ -17,7 +17,8 @@
                 <base-dropdown class="nav-link pr-0">
                     <div class="media align-items-center" slot="title">
                 <span class="avatar rounded-circle">
-                  <img alt="Image placeholder" src="img/theme/www.jpg">
+                  <img v-if="picture" style="width:50px;height:50px" alt="Image placeholder" :src="picture">
+                  <img v-else alt="Image placeholder" src="img/theme/www.jpg">
                 </span>
                         <div class="media-body ml-2 d-none d-lg-block">
                             <h1 class="mb-0 text-sm  font-weight-bold">Ions Event Creations</h1>
@@ -56,9 +57,15 @@
     </base-nav>
 </template>
 <script>
+import firebase from '@/firebase_init.js';
+let db = firebase.firestore();
+const auth = firebase.auth();
   export default {
     data() {
+
       return {
+        uid:'',
+        picture:null,
         activeNotifications: false,
         showMenu: false,
         searchQuery: ''
@@ -73,6 +80,16 @@
       },
       toggleMenu() {
         this.showMenu = !this.showMenu;
+      }
+    },
+    beforeMount(){
+      this.uid=localStorage.getItem('uid')
+      if(this.uid){
+        db.doc('users/'+this.uid).get().then(u=>{
+          if(u.data()){
+            this.picture=u.data().photoURL
+          }
+        })
       }
     }
   };

@@ -6,6 +6,7 @@
       title="Argon"
     >
       <template slot="links">
+        <sidebar-item  :link="{name: 'Home', icon: 'ni ni-shop text-blue', path: '/dashboard'}"/>
         <sidebar-item
           :link="{
             name: 'All Events',
@@ -18,8 +19,8 @@
 
         <sidebar-item v-if="udata.type=='User'" :link="{name: 'Registered Events', icon: 'ni ni-planet text-blue', path: '/User_Registrations'}"/>
         <sidebar-item v-if="udata.type=='Admin'" :link="{name: 'Create Event', icon: 'ni ni-pin-3 text-orange', path: '/createEvent'}"/>
-        <sidebar-item v-if="udata.type=='Admin'" :link="{name: 'ListofUsers', icon: 'ni ni-single-02 text-yellow', path: '/ListofUsers'}"/>
-  
+        <sidebar-item v-if="udata.type=='Admin'" :link="{name: 'My Events', icon: 'ni ni-single-02 text-yellow', path: '/ListofUsers'}"/>
+        
 
       </template>
     </side-bar>

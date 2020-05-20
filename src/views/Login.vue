@@ -1,6 +1,5 @@
 <template>
         <div class="row justify-content-center">
-            
             <div class="col-lg-5 col-md-7">
                 <div class="card bg-secondary shadow border-0">
                     <div class="card-header bg-transparent pb-5">
@@ -38,14 +37,14 @@
                             <br>
                                   <div class="col-md-7">
                                       
-                        <base-button type="primary" class=" mb-10" @click="loginEmail">
+                        <base-button v-if="!Logingin" type="primary" class=" mb-10" @click="loginEmail">
                             Login
                         </base-button>
+                        <base-button v-else disabled type="primary" class=" mb-10">
+                            Logingin...
+                        </base-button>
                         <div class="vld-parent">
-                         <loading :active.sync="isLoading" 
-                                    :can-cancel="true" 
-                                    :on-cancel="onCancel"
-                                    :is-full-page="fullPage"></loading>
+                         
                         </div>
                         
                         <modal :show.sync="modals.modal2"
@@ -87,7 +86,7 @@
         </div>
 </template>
 <script>
-import Loading from 'vue-loading-overlay';
+
 import firebase from '@/firebase_init.js';
 let db = firebase.firestore();
 const auth = firebase.auth();
@@ -95,8 +94,8 @@ const auth = firebase.auth();
         name: 'login',
         data() {
             return {
-                isLoading: false,
-                fullPage: true,
+                Logingin: false,
+               // fullPage: true,
                 email: '',
                 password: '',
                 error:'',
@@ -105,10 +104,7 @@ const auth = firebase.auth();
                 },
             }        
         },
-        components: {
-            Loading,
-            
-        },
+        
         methods:{
             setType(type){
             this.type=type
@@ -143,7 +139,7 @@ const auth = firebase.auth();
             },
             loginEmail(){
                 if(this.password!=''&&this.email!=''){
-                    this.isLoading = true;
+                    this.Logingin = true
                 auth.signInWithEmailAndPassword(this.email,this.password).then(snap=>{
                     let user = snap.user
                     console.log(user)
@@ -164,11 +160,11 @@ const auth = firebase.auth();
                         }
                 })
                 }).then(()=>{
-                    this.isLoading=false
+                    this.Logingin=false
                     this.$router.push('dashboard')
                 })
                 .catch(err=>{
-                    this.isLoading=false
+                    this.Logingin=false
                     this.error = err.message
                     console.log(err)
                 })

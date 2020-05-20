@@ -18,7 +18,7 @@ export default new Router({
           // route level code-splitting
           // this generates a separate chunk (about.[hash].js) for this route
           // which is lazy-loaded when the route is visited.
-          component: () => import(/* webpackChunkName: "demo" */ './views/Dashboard.vue')
+          component: () => import(/* webpackChunkName: "demo" */ './views/First.vue')
         },
         {
           path: '/icons',
@@ -80,11 +80,6 @@ export default new Router({
           name: 'Participants Data',
           component: () => import(/* webpackChunkName: "demo" */ './views/participant.vue')
 
-        },
-        {
-          path: '/First',
-          name: 'Page 2',
-          component: () => import(/* webpackChunkName: "demo" */ './views/First.vue')
         }
 
 

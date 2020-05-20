@@ -72,11 +72,10 @@
                             </div>
                         </div>
                          <div class="col-md-7">
-                             <loading :active.sync="isLoading" 
-                                    :can-cancel="true" 
-                                    :on-cancel="onCancel"
-                                    :is-full-page="fullPage"></loading>
-                        <base-button type="primary" class=" mb-10" @click=createAccount>
+                        <base-button v-if="creating" type="primary" class=" mb-10">
+                            Creating...
+                        </base-button>
+                        <base-button v-else type="primary" class=" mb-10" @click=createAccount>
                             Create Account
                         </base-button>
 
@@ -124,7 +123,7 @@
     </div>
 </template>
 <script>
-import Loading from 'vue-loading-overlay';
+
  import firebase from '@/firebase_init.js';
 let db = firebase.firestore();
 const auth = firebase.auth();
@@ -133,6 +132,8 @@ const auth = firebase.auth();
     name: 'register',
     data() {
       return {
+        creating:false,
+        
         name: '',
         email: '',
         password: '',
@@ -144,10 +145,6 @@ const auth = firebase.auth();
         },
       }
     },
-    components: {
-            Loading,
-            
-        },
     methods:{
         setType(type){
             this.type=type
@@ -182,7 +179,7 @@ const auth = firebase.auth();
         },
         createAccount(){
             if(this.name!=''&&this.type!=''&&this.password!=''&&this.email!=''){
-                this.isLoading = true;
+                this.creating = true;
             auth.createUserWithEmailAndPassword(this.email,this.password).then(user=>{
                 console.log(user)
                 let userData= {
@@ -196,12 +193,12 @@ const auth = firebase.auth();
                     console.log(userData)
                     localStorage.setItem('uid',user.user.uid)
                     localStorage.setItem('user',JSON.stringify(userData))
-                    this.isLoading=false
+                    this.creating=false
                     this.$router.push('dashboard')
                 })
             })
             .catch(err=>{
-                this.isLoading=false
+                this.creating=false
                 this.error = err.message
                 console.log(err)
             })
