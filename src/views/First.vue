@@ -1,5 +1,5 @@
 <template>
-    <div style="min-height: 1000px;min-width: 1000px; background-image: url(img/theme/41.jpg); background-size: cover; background-position: center top;" >
+    <div style="min-height: 900px;min-width: 900px; background-image: url(img/theme/41.jpg); background-size: cover; background-position: center top;" >
 
       <br>
       <br>
@@ -16,6 +16,7 @@
                     
                   
                     <div style="min-height: 450px;min-width: 400px; background-image: url(img/theme/44.jpg); background-size: cover; background-position: center top;margin-right:20px;margin-left:20px ;" class="rounded square">
+                    
                     </div>  
                   <br>
             </mdb-col>
@@ -25,9 +26,38 @@
                 <div style="min-height: 250px;min-width: 850px; background-size: cover; background-position: center top;" >
                     <mdb-row class="mb-4">
                            <mdb-col>    
-                               <div style="min-height: 825px;min-width: 400px; background-image: url(img/theme/furn.jpg); background-size: cover; background-position: center top;margin-right:20px;margin-left:10px ;" class="rounded square"></div>
+                               <div style="min-height: 850px;min-width: 400px; background-image: url(img/theme/furn.jpg); background-size: cover; background-position: center top;margin-right:20px;margin-left:10px ;" class="rounded square"></div>
                            </mdb-col>
+
+                           <br>
+                           <br>
+                           <br>
+                           <br>
+                              
+
+
                            <mdb-col>  
+                             <mdb-row class="mb-4">
+                                 <mdb-col>    
+                                    <div class="row justify-content-center" >
+                                      
+                                        <div class="col-lg-3 order-lg-2">
+                                          
+                                            <div class="card-profile-image">                                                
+                                                    <img src="img/theme/www.jpg" class="rounded-circle"  style="margin-top:30px;height:105px">
+                                                      <hr>                                              
+                                            </div>
+                                            
+                                        </div>
+                                        
+                                   </div>
+                                </mdb-col>                                                             
+                            </mdb-row>  
+
+                            
+                            <br>
+                            <br>
+                            <br>
 
                          <div style="min-height: 200px;min-width: 600px">
                              <h1 style="color:#5E321F;border-bottom:2px solid #5E321F">About Us</h1>
@@ -56,24 +86,9 @@
                                            <h2 style="color:#492000">Shubham  details</h2>
                         </mdb-col>    
                        </mdb-row>
-                           <br><br><br>
-                          <mdb-row class="mb-4">
-                                 <mdb-col>    
-                                    <div class="row justify-content-center" >
-                                      
-                                        <div class="col-lg-3 order-lg-2">
-                                          
-                                            <div class="card-profile-image">                                                
-                                                    <img src="img/theme/d.jpg" class="rounded-circle"  style="border:1px solid #5E321F">
-                                                      <hr>                                              
-                                            </div>
-                                            
-                                        </div>
-                                        
-                                   </div>
-                                </mdb-col>                                                             
-                            </mdb-row>  
-                           <br><br><br>
+                          
+                          
+                           <br><br>
                         <mdb-row>
                         <mdb-col>    
                                    <h1 style="color:#5E321F;border-bottom:0.5px solid #5E321F">Feedback</h1>
@@ -123,10 +138,10 @@
         <li class="list-inline-item">
          
         </li>
-        <li class="list-inline-item"><a href="#" class="btn  btn-rounded" style="background-color:#5E321F;color:white">Get Started</a></li>
+        <li class="list-inline-item" v-if="!uid"><a href="#" class="btn  btn-rounded" style="background-color:#5E321F;color:white">Get Started</a></li>
       </ul>
     </div>
-
+   
 
    
     <div class="text-center">
@@ -164,6 +179,15 @@
     },
     directives: {
       animateOnScroll
+    },
+     data() {
+      return {        
+          uid:'',     
+      }
+     },
+       beforeMount(){
+       
+        this.uid = localStorage.getItem('uid')
     }
   }
 </script>

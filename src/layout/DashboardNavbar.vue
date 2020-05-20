@@ -17,7 +17,7 @@
                 <base-dropdown class="nav-link pr-0">
                     <div class="media align-items-center" slot="title">
                 <span class="avatar rounded-circle">
-                  <img alt="Image placeholder" src="img/theme/89.png">
+                  <img alt="Image placeholder" src="img/theme/www.jpg">
                 </span>
                         <div class="media-body ml-2 d-none d-lg-block">
                             <h1 class="mb-0 text-sm  font-weight-bold">Ions Event Creations</h1>
