@@ -7,7 +7,9 @@
                 <span class="navbar-toggler-icon"></span>
             </navbar-toggle-button>
             <router-link class="navbar-brand" to="/">
-                <img :src="logo" class="navbar-brand-img" alt="...">
+                 <span class="avatar rounded-circle">
+                  <img alt="Image placeholder" src="img/theme/www.jpg">
+                </span><h1>ionsEve</h1>
             </router-link>
 
             <slot name="mobile-right">

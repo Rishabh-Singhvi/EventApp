@@ -1,9 +1,10 @@
 <template>
-    <div>
+    <div style="min-height: 900px;min-width: 900px; background-image: url(img/theme/41.jpg); background-size: cover; background-position: center top;" >
+
         <base-header class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center"
-                     style="min-height: 600px; background-image: url(img/theme/pexels-photo-3183183.jpeg); background-size: cover; background-position: center top;">
+                     style="min-height: 600px; background-image: url(img/theme/23.jpg); background-size: cover; background-position: center top;">
             <!-- Mask -->
-            <span class="mask bg-gradient-success opacity-8"></span>
+            <span class="mask bg-gradient-success opacity-1"></span>
             <!-- Header container -->
             <div class="container-fluid d-flex align-items-center">
                 <div class="row">
@@ -15,12 +16,12 @@
             </div>
         </base-header>
 
-        <div class="container-fluid mt--7">
-            <div class="row">
+        <div class="container-fluid mt--7" >
+            <div class="row" >
         
 
                 <div class="col-xl-12 order-xl-1">
-                    <card shadow type="secondary">
+                    <card shadow type="secondary" >
                         <div slot="header" class="bg-white border-0">
                             <div class="row align-items-center">
                                 <div class="col-8">
@@ -176,7 +177,7 @@
                     </card>
                     <br>
                         <div class="col-md-3">
-                        <base-button block type="warning" class=" mb-3" @click="mode">
+                        <base-button block type="danger" class=" mb-3" @click="mode">
                             Create
                         </base-button>
 
