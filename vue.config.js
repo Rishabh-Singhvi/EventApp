@@ -10,6 +10,7 @@ module.exports = {
       })
     ]
   },
+   
   pwa: {
     name: 'Vue Argon Dashboard',
     themeColor: '#172b4d',

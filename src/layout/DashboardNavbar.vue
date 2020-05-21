@@ -37,10 +37,11 @@
                         
                         
                         <div class="dropdown-divider"></div>
-                        <router-link to="/profile" class="dropdown-item">
-                            <i class="ni ni-user-run"></i>
-                            <span>Logout</span>
-                        </router-link>
+                           <div class="dropdown-item">
+                            <i class="ni ni-user-run" ></i>
+                            <span @click="Logout">Logout</span>
+                           </div>
+                        
                     </template>
                 </base-dropdown>
             </li>
@@ -63,6 +64,12 @@ const auth = firebase.auth();
       };
     },
     methods: {
+      Logout(){
+          auth.signOut().then(()=>{
+            console.log("Logged Out")
+            this.$router.push('/login')
+          })
+      },
       toggleSidebar() {
         this.$sidebar.displaySidebar(!this.$sidebar.showSidebar);
       },

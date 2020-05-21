@@ -103,9 +103,8 @@
                         <div class="row justify-content-center">
                             <div class="col-lg-3 order-lg-2">
                                 <div class="card-profile-image">
-                
-                                        <img src="img/theme/images (8).jpg" class="rounded-circle">
-                                    
+                                        <img v-if="picture" style="width:150px;height:150px" :src="picture" class="rounded-circle">
+                                        <img v-else src="img/theme/images (8).jpg" class="rounded-circle">                                    
                                 </div>
                             </div>
                         </div>
@@ -158,8 +157,8 @@
                                             <span class="ni education_hat mr-2">{{this.usersObj.ticket}}</span>
                                         </div>
                                         <div>
-                                            <span class="heading">AadharNo.</span>
-                                            <span class="ni education_hat mr-2">{{this.usersObj.aadhar}}</span>
+                                            <span class="heading">Goverment ID</span>
+                                            <img style="width:180px;height:180px" :src="this.usersObj.aadhar">
                                         </div>
                                         <div>
                                             <span class="heading">Address</span>
@@ -193,7 +192,8 @@ export default {
           usersObj:{},
           eventObj:{},
           eventList:[],
-          uid:''
+          uid:'',
+          picture:null
         };
       }, 
    beforeMount(){
@@ -203,13 +203,20 @@ export default {
       let eventID=this.$route.params.eventID
         console.log(this.uid)
         console.log(eventID)
-        db.collection('AllUsers/'+this.uid+'/'+eventID).get().then(snapshot=>{
+         db.doc('users/'+this.uid).get().then(u=>{
+            this.picture=u.data().photoURL
+            console.log(u.data().photoURL)
+            console.log("jksdb")
+            console.log(this.picture)
+        }).then(()=>{
+            db.collection('AllUsers/'+this.uid+'/'+eventID).get().then(snapshot=>{
             console.log(eventID)
                snapshot.forEach(doc=>{
                    console.log(doc.data())
                    this.usersObj=doc.data()
                    console.log(this.usersObj)
                })
+        })
         }).then(()=>{
          db.collection('AllEvents').get().then(snapshot=>{
              snapshot.forEach(doc=>{

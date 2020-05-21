@@ -138,7 +138,7 @@
         <li class="list-inline-item">
          
         </li>
-        <li class="list-inline-item" v-if="!uid"><a href="#" class="btn  btn-rounded" style="background-color:#5E321F;color:white">Get Started</a></li>
+        <li class="list-inline-item" v-if="!uid"> <router-link :to="{path:'/register'}" ><a @click="start" class="btn  btn-rounded" style="background-color:#5E321F;color:white">Get Started</a></router-link></li>
       </ul>
     </div>
    
@@ -182,12 +182,21 @@
     },
      data() {
       return {        
-          uid:'',     
+          nuid:'',
+          uid:'' 
+
       }
      },
        beforeMount(){
        
-        this.uid = localStorage.getItem('uid')
+        this.nuid = localStorage.getItem('uid')
+        db.collection('users').onSnapshot(snap=>{
+          snap.forEach(doc=>{
+            if(doc.id==this.nuid){
+                this.uid=doc.id
+            }
+          })
+        })
     }
   }
 </script>
