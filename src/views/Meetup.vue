@@ -1,19 +1,14 @@
 <template>
     <div>
-        <base-header class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center"
-                     style="min-height: 600px; background-image: url(img/theme/Event1.jpg; background-size: cover; background-position: center top;">
+        <base-header
+                     style="min-height: 600px; background-image: url(img/theme/56.jpg; background-size: cover; background-position: center top;padding-left:350px;padding-top:13px">
             <!-- Mask -->
-            <span class="mask bg-gradient-success opacity-2"></span>
-            <!-- Header container -->
-            <div class="container-fluid d-flex align-items-center">
-                <div class="row">
-                    <div class="col-lg-7 col-md-10">
-                        <h1 class="display-2 text-white">Event Registration</h1>
-                        <p class="text-white mt-0 mb-5">This is event registration page.You can learn more about the event and register here</p>
+            <span class="mask bg-gradient-success opacity-1">            
                         
-                    </div>
-                </div>
-            </div>
+            </span>
+            <!-- Header container -->
+            <h1 class="display-2 text-white" style="padding-top:0px">Event Registration</h1>               
+                                                                              
         </base-header>
 
         <div class="container-fluid mt--7">
@@ -33,7 +28,7 @@
                         <div class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4" style="background-image: url(img/theme/bharath-g-s-aLGiPJ4XRO4-unsplash.jpg; background-size: cover; background-position: center top;">
                             
                         </div>
-                        <div class="card-body pt-0 pt-md-4" style="background-image: url(img/theme/bharath-g-s-aLGiPJ4XRO4-unsplash.jpg; background-size: cover; background-position: center top;">
+                        <div class="card-body pt-0 pt-md-4" style="background-image: url(img/theme/114.jpg; background-size: cover; background-position: center top;">
                             <div class="row">
                                 <div class="col">
                                     <div class="card-profile-stats d-flex justify-content-center mt-md-1">
@@ -224,14 +219,16 @@
                                             
                                         </div>
                                          <div class="col-lg-6">
-                                             <h4 v-if="picture" class="text-success">Uploaded!</h4>
+                                             <h4 v-if="picture" class="text-success">Uploaded!</h4>                                             
                                              <h4 v-else>Upload any goverment ID</h4>
                                              <div style="display:inline-block">
                                             <input type="file" @change="previewImage" accept="image/*" >
                                     <!-- <p>Progress: {{uploadValue.toFixed()+"%"}}
       <progress id="progress" :value="uploadValue" max="100" ></progress>  </p> -->
                                          
-                                           <base-button size="sm" type="info" class="mr-4" @click="onUpload">Upload</base-button>
+                                           <base-button size="sm" type="info" class="mr-4" @click="onUpload" style="margin-top:5px">Upload</base-button>
+                                            <base-button v-if="uploading" size="sm" type="danger" class="mr-4" @click="onUpload" style="margin-top:5px">Uploading...</base-button>
+                                            
                                              </div>
                                             
                                         </div>
@@ -384,6 +381,7 @@ const auth = firebase.auth();
           isLoading: false,
           userObj:{},
           eventObj:{},
+          uploading:false,
         modals:{
            modal2:false,
            modal1:false
@@ -404,6 +402,7 @@ const auth = firebase.auth();
       this.imageData = event.target.files[0];
     },
         onUpload(){
+      this.uploading=true;
       this.uid=localStorage.getItem('uid')
       this.picture=null;
       let storageRef=firebase.storage().ref(`${this.imageData.name}`).put(this.imageData);
@@ -416,6 +415,7 @@ const auth = firebase.auth();
            console.log(this.picture)
            this.userObj.aadhar=this.picture
         });
+        this.uploading=false;
       }
       )
 
