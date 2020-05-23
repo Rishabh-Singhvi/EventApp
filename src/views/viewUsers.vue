@@ -1,9 +1,9 @@
 <template>
             
-    <div>
-        <base-header type="gradient-success" class="pb-6 pb-8 pt-5 pt-md-8">
+    <div style="min-height: 1000px;min-width: 900px; background-image: url(img/theme/65.jpg); background-size: cover; background-position: center top;" >
+       
             <!-- Card stats -->
-        <div class="row">
+        <div class="row" style="padding-top:100px;padding-left:25px;padding-right:20px">
            <div class="card shadow col-xl-8 mb-4 mb-xl-0"
        :class="type === 'dark' ? 'bg-default': ''">
     <div class="card-header border-0"
@@ -76,11 +76,11 @@
 
         </div>
         <br>
-        <base-button  type="default" v-if="modals.modal1==false" @click="showChart">View Chart</base-button>
+        <base-button  type="default" v-if="modals.modal1==false" @click="showChart" style="margin-left:10px">View Chart</base-button>
         <base-button  type="default" v-else disabled >View Chart</base-button>
-        <base-button  type="default" v-if="modals.modal1==true" @click="hideChart">Hide Chart</base-button>
+        <base-button  type="default" v-if="modals.modal1==true" @click="hideChart"  style="margin-left:10px">Hide Chart</base-button>
         <base-button  type="default" v-else disabled >Hide Chart</base-button>
-        </base-header>
+      
 
     </div>
         
