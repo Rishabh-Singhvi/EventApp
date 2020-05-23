@@ -2,7 +2,7 @@
         <div class="row justify-content-center">
             <div class="col-lg-5 col-md-7">
                 <div class="card bg-secondary shadow border-0">
-                    <div class="card-header bg-transparent pb-5">
+                    <!-- <div class="card-header bg-transparent pb-5">
                         <div class="text-muted text-center mt-2 mb-3"><small>Sign in with</small></div>
                         <div class="btn-wrapper text-center">
                             
@@ -11,11 +11,11 @@
                                 <span class="btn-inner--text">Google</span>
                             </a>
                         </div>
-                    </div>
+                    </div> -->
                     <div class="card-body px-lg-5 py-lg-5">
-                        <div class="text-center text-muted mb-4">
+                        <!-- <div class="text-center text-muted mb-4">
                             <small>Or sign in with credentials</small>
-                        </div>
+                        </div> -->
                         <form role="form">
                           
                             <base-input class="input-group-alternative mb-3"
@@ -110,33 +110,33 @@ const auth = firebase.auth();
             this.type=type
             console.log(this.type)
             },
-            loginGoogle(){
-                var provider = new firebase.auth.GoogleAuthProvider();
-                auth.signInWithPopup(provider)
-                .then(snapshot=>{
-                    let user = snapshot.user
-                    console.log(user)
-                    return db.doc("users/"+user.uid).get()
-                    .then(doc => {
-                        if(!doc.exists){
-                            return db.doc("users/"+ user.uid).set({
-                                name : user.displayName,
-                                email: user.email,
-                                registeredEvents:[],
-                                photoURL:user.photoURL
-                            })
-                        }
-                        else {
-                            console.log(doc.data())
-                            localStorage.setItem('uid',doc.id)
-                            localStorage.setItem('user',JSON.stringify(doc.data()))
-                        }
-                    })
-                })
-                .then(()=>{
-                    this.$router.push('dashboard')
-                })
-            },
+            // loginGoogle(){
+            //     var provider = new firebase.auth.GoogleAuthProvider();
+            //     auth.signInWithPopup(provider)
+            //     .then(snapshot=>{
+            //         let user = snapshot.user
+            //         console.log(user)
+            //         return db.doc("users/"+user.uid).get()
+            //         .then(doc => {
+            //             if(!doc.exists){
+            //                 return db.doc("users/"+ user.uid).set({
+            //                     name : user.displayName,
+            //                     email: user.email,
+            //                     registeredEvents:[],
+            //                     photoURL:user.photoURL
+            //                 })
+            //             }
+            //             else {
+            //                 console.log(doc.data())
+            //                 localStorage.setItem('uid',doc.id)
+            //                 localStorage.setItem('user',JSON.stringify(doc.data()))
+            //             }
+            //         })
+            //     })
+            //     .then(()=>{
+            //         this.$router.push('dashboard')
+            //     })
+            // },
             loginEmail(){
                 if(this.password!=''&&this.email!=''){
                     this.Logingin = true

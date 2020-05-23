@@ -170,6 +170,8 @@
 
 
 <script>
+import firebase from '@/firebase_init.js';
+let db = firebase.firestore();
   import { mdbRow, mdbCol, animateOnScroll } from 'mdbvue';
   export default {
     name: 'AnimationsPage',
@@ -193,6 +195,7 @@
         db.collection('users').onSnapshot(snap=>{
           snap.forEach(doc=>{
             if(doc.id==this.nuid){
+              console.log(doc.id)
                 this.uid=doc.id
             }
           })
