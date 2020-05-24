@@ -1,26 +1,27 @@
 <template>
-    <div>
-        <base-header type="gradient-success" class="pb-6 pb-8 pt-5 pt-md-8" >
+    <div style="min-height:900px;min-width: 700px; background-image: url(img/theme/41.jpg); background-size: cover; background-position: center top;">
      
+            <base-header style="min-height:325px;min-width: 700px; background-image: url(img/theme/create.jpg); background-size: cover; background-position: center top;" >
+            </base-header>
         
             <!-- Card stats -->
-            <div class="row" >
-              <div class="columns col-xl-3 col-lg-6" v-for="event in eventList" v-bind:key="event.title">
+            <div class="row" style="padding-top:100px;margin-left:20px;" >
+              <div class="columns col-xl-3 col-lg-6" v-for="event in eventList" v-bind:key="event.title" style="margin-left:30px;">
                     <stats-card type="gradient-red"
                                 :sub-title="event.title"
                                 class="mb-4 mb-xl-0"
-                                style="background-image: url(img/theme/bharath-g-s-aLGiPJ4XRO4-unsplash.jpg);background-size: cover; background-position: center top;margin-right:25px"                                
+                                style="background-image: url(img/theme/back.jpg);background-size: cover; background-position: center top;margin-right:25px;min-height:300px;min-width:300px;"                                
                     >
                 
                         <template slot="footer">
                           <hr class="my-4" />
-                            <span class="text-primary mr-4 font-weight-300" >Time slot : </span><span>{{event.timings.start}}</span> to <span>{{event.timings.end}}</span><br>
-                            <span class="text-primary mr-4 font-weight-300">Date : </span><span>{{event.timings.date}} </span>
+                            <span class="text-primary mr-4 font-weight-300"  style="padding-right:10px">Time slot : </span><span>{{event.timings.start}}</span> to <span>{{event.timings.end}}</span><br>
+                            <span class="text-primary mr-4 font-weight-300" style="padding-right:35px">Date : </span><span>{{event.timings.date}} </span>
                             <br>
                             <br>
-                            <p class="text-danger mr-4 font-weight-300">{{event.description}}</p>
+                            <p class="text-danger mr-4 font-weight-300" >{{event.description}}</p>
                             
-                        <router-link :to="{path:'/ListofUsers/'+event.id}"><base-button  type="default">View Details</base-button></router-link>
+                        <router-link :to="{path:'/ListofUsers/'+event.id}"><base-button  type="default" style="margin-left:55px">View Details</base-button></router-link>
                         
 
                         </template>
@@ -28,8 +29,7 @@
                     <br>
               </div>
             </div>
-        </base-header>
-
+      
         
 
     </div>

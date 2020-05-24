@@ -73,8 +73,8 @@
                       <mdb-row>
                         <mdb-col>    
                                            <h1 style="color:#5E321F;border-bottom:0.5px solid #5E321F">Contact</h1>
-                                           <h2 style="color:#492000">Rishabh : rishabh@gmail.com</h2>
-                                           <h2 style="color:#492000">Shubham : shubham@gmail.com</h2>
+                                           <h2 style="color:#492000">Rishabh : rishabhsinghvi111@gmail.com</h2>
+                                           <h2 style="color:#492000">Shubham : shubhamjainnie@gmail.com</h2>
                         </mdb-col>    
                        </mdb-row>
 

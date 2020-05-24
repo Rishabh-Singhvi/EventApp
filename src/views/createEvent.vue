@@ -10,7 +10,7 @@
                 <div class="row">
                     <div class="col-lg-7 col-md-10">
                         <h4 class="display-4 text-white">Create your Event</h4>
-                        <p class="text-white mt-0 mb-5">This is your event creation page. You can create your event here</p>
+                        <p class="text-white mt-0 mb-5">Organise your event . You can create your event here</p>
                     </div>
                 </div>
             </div>
