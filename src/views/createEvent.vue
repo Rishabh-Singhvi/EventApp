@@ -298,7 +298,7 @@ const auth = firebase.auth();
             console.log(this.eventObj.type)
         },
         mode(){
-             if(this.eventObj.title!=''&&this.eventObj.description!=''&&this.eventObj.type!=''&&this.eventObj.timings.date!=''&&this.eventObj.email!=''&&this.eventObj.phoneNO!=''&&this.eventObj.timings.start!=''&&this.eventObj.address!=''&&this.eventObj.state!=''&&this.eventObj.city!=''&&this.eventObj.postalCode!=''&&this.eventObj.timings.end!=''){
+             if(this.eventObj.title!=''&&this.eventObj.description!=''&&this.eventObj.type!=''&&this.eventObj.timings.date!=''&&this.eventObj.email!=''&&this.eventObj.phoneNo!=''&&this.eventObj.timings.start!=''&&this.eventObj.address!=''&&this.eventObj.state!=''&&this.eventObj.city!=''&&this.eventObj.postalCode!=''&&this.eventObj.timings.end!=''){
                  this.modals.modal2=true
              }
              else{
