@@ -179,6 +179,7 @@ const auth = firebase.auth();
             'aadhar':'',
             'registrationNo':''
             },
+            myProfile:{},
            imageData: null,
             uploadValue: 0,
           picture:null,
@@ -217,11 +218,13 @@ const auth = firebase.auth();
       ()=>{this.uploadValue=100;
         storageRef.snapshot.ref.getDownloadURL().then((url)=>{
           this.picture =url;
-          db.doc('users/'+this.uid).update({
+          this.myProfile.photoURL=this.picture
+        }).then(()=>{
+            db.doc('users/'+this.uid).update({
                  'photoURL':this.picture
           })
           this.uploading=false
-        });
+        })
       }
       )
            
@@ -229,15 +232,19 @@ const auth = firebase.auth();
     },
     register(){
         this.uid=localStorage.getItem('uid')
-        db.doc('newUser/'+this.uid).set(this.userObj).then(()=>{
+        db.doc('user/'+this.uid).set(this.myProfile).then(()=>{
+             db.doc('newUser/'+this.uid).set(this.userObj)
+        }).then(()=>{
             this.$router.push('/dashboard')
         })
+       
     }
 
     },
     beforeMount(){
         this.uid=localStorage.getItem('uid')
          db.doc('users/'+this.uid).get().then(user=>{
+                 this.myProfile=user.data()
                  this.picture=user.data().photoURL
           }).then(()=>{
               db.doc('newUser/'+this.uid).get().then(snap=>{
