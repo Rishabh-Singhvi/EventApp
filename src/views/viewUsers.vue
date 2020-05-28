@@ -1,6 +1,12 @@
 <template>
-            
-    <div style="min-height: 1000px;min-width: 900px; background-image: url(img/theme/65.jpg); background-size: cover; background-position: center top;" >
+<div>
+  <div v-if="!pageLoaded">
+            <loading :active.sync="isLoading" 
+                :can-cancel="true" 
+                :on-cancel="onCancel"
+                :is-full-page="fullPage"></loading>
+  </div>       
+    <div v-if="pageLoaded" style="min-height: 1000px;min-width: 900px; background-image: url(img/theme/65.jpg); background-size: cover; background-position: center top;" >
        
             <!-- Card stats -->
         <div class="row" style="padding-top:100px;padding-left:25px;padding-right:20px">
@@ -83,20 +89,20 @@
       
 
     </div>
-        
+</div>  
 </template>
 <script>
-  import * as chartConfigs from '@/components/Charts/config';
- 
-  import BarChart from '@/components/Charts/BarChart';
+import * as chartConfigs from '@/components/Charts/config';
+import Loading from 'vue-loading-overlay';
+import BarChart from '@/components/Charts/BarChart';
 import firebase from '@/firebase_init.js';
 let db = firebase.firestore();
-const auth = firebase.auth();
+
   export default {
     name: 'projects-table',
     components: {
-      
-      BarChart,
+      Loading,
+      BarChart
     },
     props: {
       type: {
@@ -107,6 +113,8 @@ const auth = firebase.auth();
     },
     data() {
       return {
+        isLoading:false,
+        pageLoaded:false, 
         eveid:'',
         modals:{
           modal1:false
@@ -125,62 +133,22 @@ const auth = firebase.auth();
             }]
           }
         }
-        // // tableData: [
-        //   {
-        //     img: 'img/theme/bootstrap.jpg',
-        //     title: 'Argon Design System',
-        //     budget: '$2500 USD',
-        //     status: 'pending',
-        //     statusType: 'warning',
-        //     completion: 60
-        //   },
-        //   {
-        //     img: 'img/theme/angular.jpg',
-        //     title: 'Angular Now UI Kit PRO',
-        //     budget: '$1800 USD',
-        //     status: 'completed',
-        //     statusType: 'success',
-        //     completion: 100
-        //   },
-        //   {
-        //     img: 'img/theme/sketch.jpg',
-        //     title: 'Black Dashboard',
-        //     budget: '$3150 USD',
-        //     status: 'delayed',
-        //     statusType: 'danger',
-        //     completion: 72
-        //   },
-        //   {
-        //     img: 'img/theme/react.jpg',
-        //     title: 'React Material Dashboard',
-        //     budget: '$4400 USD',
-        //     status: 'on schedule',
-        //     statusType: 'info',
-        //     completion: 90
-        //   },
-        //   {
-        //     img: 'img/theme/vue.jpg',
-        //     title: 'Vue Paper UI Kit PRO',
-        //     budget: '$2200 USD',
-        //     status: 'completed',
-        //     statusType: 'success',
-        //     completion: 100
-        //   }
-        // ]
       }
     },
     beforeMount(){
+      this.isLoading=true
+      this.pageLoaded=false
         let eventID=this.$route.params.eventID
         db.collection('AllEvents').get().then(snapshot=>{
             snapshot.forEach(doc => {
                 if(doc.id==eventID){
-                    console.log(doc.id)
-                    console.log(doc.data().registeredUsers)
                     this.tableData=doc.data().registeredUsers
-                    console.log(this.tableData)
                     this.eveid=doc.id
                 }
             })
+        }).then(()=>{
+          this.pageLoaded=true
+          this.isLoading=false
         })
         
 
@@ -190,9 +158,7 @@ const auth = firebase.auth();
            this.modals.modal1=true
           this.tableData.forEach(ele=>{
             if(ele.regType=='Self'){
-              console.log(ele.regType)
                this.countSelf++
-               console.log(this.countSelf)
             }
             if(ele.regType=='Group'){
                this.countGroup++
@@ -208,9 +174,6 @@ const auth = firebase.auth();
             this.redBarChart.chartData.datasets[0].data.splice(1,0,this.countGroup)
             this.redBarChart.chartData.datasets[0].data.splice(2,0,this.countCorporate)
             this.redBarChart.chartData.datasets[0].data.splice(3,0,this.countOthers)
-            console.log(
-            this.redBarChart.chartData.datasets[0].data)
-            
          },
          hideChart(){
            this.modals.modal1=false

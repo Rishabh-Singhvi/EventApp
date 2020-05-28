@@ -1,7 +1,8 @@
 <template>
-    <div>
+<div>
+    <div v-if="pageLoaded">
         <base-header class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center"
-                     style="min-height: 500px; background-image: url(img/theme/a.jpg); background-size: cover; background-position: center top;">
+                     style="min-height: 500px; background-image: url(img/theme/Autumn.jpg); background-size: cover; background-position: center top;">
             <!-- Mask -->
             <!-- <span class="mask bg-gradient-success opacity-1"></span> -->
             <!-- Header container -->
@@ -16,12 +17,7 @@
                     </div>
                 </div>
             </div>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
+            </base-header>
             <div class="container-fluid mt--7" >
             <div class="row">
              <div class="col-xl-4 order-xl-2 mb-5 mb-xl-0">
@@ -174,9 +170,9 @@
                 </div>
             </div>
         </div>
-        </base-header>
+    
     </div>
-        
+</div>     
     
 </template>
 <script>
@@ -184,10 +180,12 @@
 
 import firebase from '@/firebase_init.js';
 let db = firebase.firestore();
-const auth = firebase.auth();
+
 export default {
        data() {
         return {
+        isLoading:false,
+          pageLoaded:false,
           user:{},
           usersObj:{},
           eventObj:{},
@@ -197,58 +195,30 @@ export default {
         };
       }, 
    beforeMount(){
-
-      
+    this.pageLoaded=false
       this.uid = localStorage.getItem('uid') 
       let eventID=this.$route.params.eventID
-        console.log(this.uid)
-        console.log(eventID)
          db.doc('users/'+this.uid).get().then(u=>{
             this.picture=u.data().photoURL
-            console.log(u.data().photoURL)
-            console.log("jksdb")
-            console.log(this.picture)
         }).then(()=>{
             db.collection('AllUsers/'+this.uid+'/'+eventID).get().then(snapshot=>{
-            console.log(eventID)
                snapshot.forEach(doc=>{
-                   console.log(doc.data())
                    this.usersObj=doc.data()
-                   console.log(this.usersObj)
                })
         })
         }).then(()=>{
-         db.collection('AllEvents').get().then(snapshot=>{
-             snapshot.forEach(doc=>{
+         db.collection('AllEvents').get().then(snap=>{
+             snap.forEach(doc=>{
                  if(doc.id==eventID){
-                     console.log(doc.id)
-                     console.log(doc.data())
-                     this.eventObj=doc.data()
-                     console.log(this.eventObj);
-                     
+                     this.eventObj=doc.data()  
                  }
                 
              })
          })
-      }) 
-      
-
-
-
-      
-    //   let eventID=this.$route.params.eventID
-    //     console.log(this.uid)
-    //     console.log(eventID)
-    //     db.collection('AllUsers/'+this.uid+'/'+eventID).onSnapshot(snapshot=>{
-    //         console.log(eventID)
-    //            snapshot.forEach(doc=>{
-    //                console.log(doc.data())
-    //                this.usersObj=doc.data()
-                   
-    //            })
-    //     })
-
-     
+      }).then(()=>{
+          this.pageLoaded=true
+        
+      })
       }
       
 }
