@@ -224,7 +224,7 @@ let db = firebase.firestore();
     },
     register(){
         this.uid=localStorage.getItem('uid')
-        db.doc('user/'+this.uid).set(this.myProfile).then(()=>{
+        db.doc('users/'+this.uid).set(this.myProfile).then(()=>{
              db.doc('newUser/'+this.uid).set(this.userObj)
         }).then(()=>{
             this.$router.push('/dashboard')
