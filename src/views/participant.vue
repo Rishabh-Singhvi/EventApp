@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div v-if="pageLoaded">
         <base-header class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center"
                      style="min-height: 600px; background-image: url(img/theme/pexels-photo-3183183.jpeg; background-size: cover; background-position: center top;">
             <!-- Mask -->
@@ -102,11 +102,12 @@
 <script>
 import firebase from '@/firebase_init.js';
 let db = firebase.firestore();
-const auth = firebase.auth();
+
 export default {
     name:'participants',
     data(){
         return{
+        pageLoaded:false,
        usersObj:{},
        picture:null
         }
@@ -117,24 +118,19 @@ export default {
         eventID:String,
     },
     beforeMount(){
+        this.pageLoaded=false
         let uid=this.$route.params.uid
         let eventID=this.$route.params.eventID
-        console.log(uid)
-        console.log(eventID)
         db.doc('users/'+uid).get().then(u=>{
             this.picture=u.data().photoURL
-            console.log(u.data().photoURL)
-            console.log("jksdb")
-            console.log(this.picture)
         }).then(()=>{
             db.collection('AllUsers/'+uid+'/'+eventID).onSnapshot(snapshot=>{
-            console.log(eventID)
                snapshot.forEach(doc=>{
-                   console.log(doc.data())
                    this.usersObj=doc.data()
-                   console.log(this.usersObj)
                })
         })
+        }).then(()=>{
+            this.pageLoaded=true
         })
     }
     

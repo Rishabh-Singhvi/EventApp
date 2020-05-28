@@ -37,7 +37,6 @@
 <script>
 import firebase from '@/firebase_init.js';
 let db = firebase.firestore();
-const auth = firebase.auth();
 export default {
        data() {
         return {
@@ -48,25 +47,19 @@ export default {
       }, 
    beforeMount(){
       this.uid = localStorage.getItem('uid')
-      console.log(this.uid)
       db.doc('users/'+this.uid).get().then(snap=>{
-        console.log(snap.data())
         this.user=snap.data()
-        console.log(this.user)
       }).then(()=>{
          db.collection('AllEvents').onSnapshot(snapshot=>{
           this.eventList = []
           let event = {}
-          snapshot.forEach(doc=>{
-            console.log(doc.id) 
+          snapshot.forEach(doc=>{ 
             event = doc.data()
-            console.log(event)
             event['id']=doc.id
             if(this.user.registeredEvents.includes(event.id)){
             this.eventList.push(event)
             }
           })
-          console.log(this.eventList)
         })
       }) 
       }

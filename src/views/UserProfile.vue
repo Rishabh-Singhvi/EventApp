@@ -153,13 +153,9 @@
 
 import firebase from '@/firebase_init.js';
 let db = firebase.firestore();
-const auth = firebase.auth();
+
   export default {
     name: 'user-profile',
-    // components: {
-    //         Loading,
-            
-    //     },
     data() {
       return {
           uploading:false,
@@ -185,9 +181,6 @@ const auth = firebase.auth();
           picture:null,
           uid:'',
         model: {
-        //     imageData: null,
-        //     uploadValue: 0,
-        //   picture:null,
           username: '',
           email: '',
           firstName: '',
@@ -202,7 +195,6 @@ const auth = firebase.auth();
     },
     methods:{
     previewImage(event) {
-     // this.uploadValue=0;
      this.uploadValue=0;
       this.picture=null;
       this.imageData = event.target.files[0];
