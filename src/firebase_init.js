@@ -5,14 +5,14 @@ import 'firebase/storage';
 
 
 const firebaseConfig = {
-    apiKey: "AIzaSyC4lCC3tExIX8z9VOXDWqCEHQRKjsVnfxc",
-    authDomain: "event-8ab22.firebaseapp.com",
-    databaseURL: "https://event-8ab22.firebaseio.com",
-    projectId: "event-8ab22",
-    storageBucket: "event-8ab22.appspot.com",
-    messagingSenderId: "605358613516",
-    appId: "1:605358613516:web:1779c6029ce0193436ba29",
-    measurementId: "G-P6P2DZ5M6R"
+  apiKey: "AIzaSyA5_UsDFY6smX91dx7BWjoQQ31f8xfBnic",
+  authDomain: "ionseve-c6f82.firebaseapp.com",
+  databaseURL: "https://ionseve-c6f82.firebaseio.com",
+  projectId: "ionseve-c6f82",
+  storageBucket: "ionseve-c6f82.appspot.com",
+  messagingSenderId: "345236853498",
+  appId: "1:345236853498:web:dc9f134977cf53858d2f43",
+  measurementId: "G-23HWC6P6D7"
   };
   
   firebase.initializeApp(firebaseConfig);
