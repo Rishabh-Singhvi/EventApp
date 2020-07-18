@@ -5,15 +5,15 @@ import 'firebase/storage';
 
 
 const firebaseConfig = {
-  apiKey: "AIzaSyA5_UsDFY6smX91dx7BWjoQQ31f8xfBnic",
-  authDomain: "ionseve-c6f82.firebaseapp.com",
-  databaseURL: "https://ionseve-c6f82.firebaseio.com",
-  projectId: "ionseve-c6f82",
-  storageBucket: "ionseve-c6f82.appspot.com",
-  messagingSenderId: "345236853498",
-  appId: "1:345236853498:web:dc9f134977cf53858d2f43",
-  measurementId: "G-23HWC6P6D7"
-  };
+  apiKey: "AIzaSyBilSJPEDohnEmmIG1gPrIeseWrgKBfxFw",
+  authDomain: "eves-18e42.firebaseapp.com",
+  databaseURL: "https://eves-18e42.firebaseio.com",
+  projectId: "eves-18e42",
+  storageBucket: "eves-18e42.appspot.com",
+  messagingSenderId: "672008820892",
+  appId: "1:672008820892:web:59e0e417eace4b6a5ff559",
+  measurementId: "G-9X04TCPDSR"
+};
   
   firebase.initializeApp(firebaseConfig);
   
