@@ -495,10 +495,10 @@ const auth = firebase.auth();
                         }, (error) => {
                             console.log('FAILED...', error);
                         })
-           
-                  }).then(()=>{
-                       this.$router.push('/User_Registrations')
-                   })
+                        this.modals.modal1=false
+                        this.modals.modal2=false
+                     this.$router.push('/User_Registrations')
+                  })
                })
             })
 

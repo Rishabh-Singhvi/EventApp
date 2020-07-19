@@ -1,4 +1,5 @@
 <template>
+<div>
     <div style="min-height:900px;min-width: 700px; background-image: url(img/theme/41.jpg); background-size: cover; background-position: center top;">
      
             <base-header style="min-height:325px;min-width: 700px; background-image: url(img/theme/create.jpg); background-size: cover; background-position: center top;" >
@@ -6,7 +7,7 @@
         
             <!-- Card stats -->
             <div class="row" style="padding-top:100px;margin-left:20px;" >
-              <div class="columns col-xl-3 col-lg-6" v-for="event in eventList" v-bind:key="event.title" style="margin-left:30px;">
+              <div class="columns col-xl-3 col-lg-6" v-for="event in eventList"    style="margin-left:30px;">
                     <stats-card type="gradient-red"
                                 :sub-title="event.title"
                                 class="mb-4 mb-xl-0"
@@ -33,6 +34,7 @@
         
 
     </div>
+</div>
 </template>
 <script>
 import firebase from '@/firebase_init.js';

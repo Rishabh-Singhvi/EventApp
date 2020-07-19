@@ -316,8 +316,8 @@ const auth = firebase.auth();
                 type: 'success',
                 title: 'Event Created'
             })
-            
-        }).then(()=>{
+            this.modals.modal2=false
+            this.modals.modal1=false
             this.$router.push('/ListofUsers')
         })
         
